@@ -166,20 +166,25 @@ diagnoses), then map:
 Point values (summary of the CMS list of ~50 conditions/extensive services,
 as originally published — **verify current FY**):
 
-| Points | Examples |
+| Points | Conditions / services |
 |---|---|
-| 8 | HIV/AIDS |
+| 8 | HIV/AIDS (coded on the SNF claim, not the MDS) |
 | 7 | Parenteral/IV feeding — high intensity |
-| 5 | IV medications while a resident; special treatments cluster at this level per CMS list |
-| 4 | Ventilator/respirator while a resident |
-| 3 | Parenteral/IV feeding — low intensity; transfusions |
-| 2 | E.g., cystic fibrosis, tracheostomy care, major organ transplant status, isolation, opportunistic infections, bone/joint infection, chronic pancreatitis, immune disorders |
-| 1 | The long tail — e.g., diabetes mellitus, wound infection, COPD/asthma, stage 4 pressure ulcer, feeding tube, morbid obesity, ostomy care, radiation, chemotherapy while a resident, dialysis, multi-drug-resistant organism, and others |
+| 5 | IV medications while a resident (O0110H) |
+| 4 | Ventilator/respirator while a resident (O0110F) |
+| 3 | Parenteral/IV feeding — low intensity; lung transplant status |
+| 2 | Transfusions while a resident (O0110I); major organ transplant status except lung; multiple sclerosis; opportunistic infections; asthma/COPD/chronic lung disease; bone/joint/muscle infections or necrosis (e.g., osteomyelitis); chronic myeloid leukemia; wound infection; diabetes mellitus |
+| 1 | The long tail — e.g., endocarditis, morbid obesity, stage 4 pressure ulcer, diabetic foot ulcer, tracheostomy care while a resident, isolation while a resident, radiation while a resident, multi-drug-resistant organism, immune disorders, end-stage liver disease, cystic fibrosis, and others |
+
+Two frequent scoring mistakes to avoid: diabetes, COPD/asthma, and wound
+infection are worth **2 points each** (not 1), and transfusions count **2
+points and only while a resident** — a transfusion given in the hospital
+before SNF admission earns nothing.
 
 The full CMS list, its MDS item sources, and per-condition capture guidance
-are beyond this summary — **see the `nta-capture` pack in this plugin for the
-detailed capture workflow**, and verify point values against the current CMS
-PDPM classification walkthrough.
+are beyond this summary — **install the `nta-capture` pack from this
+marketplace for the complete table and capture workflow**, and verify point
+values against the current CMS PDPM classification walkthrough / RAI manual.
 
 ## 7. Where the numbers come from each year
 
