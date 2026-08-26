@@ -1,0 +1,49 @@
+{
+  "name": "snf-skills",
+  "owner": {
+    "name": "Exponential Care",
+    "url": "https://exponentialcare.ai"
+  },
+  "plugins": [
+    {
+      "name": "referral-triage",
+      "source": "./plugins/referral-triage",
+      "description": "Screen hospital referral packets: clinical fit, financial fit, red flags, and a structured accept/decline decision memo."
+    },
+    {
+      "name": "pdpm-revenue",
+      "source": "./plugins/pdpm-revenue",
+      "description": "Estimate Medicare PDPM per-diem and stay revenue from referral documentation, component by component."
+    },
+    {
+      "name": "nta-capture",
+      "source": "./plugins/nta-capture",
+      "description": "Capture every legitimately documented NTA comorbidity point from hospital records, with evidence and MDS sources."
+    },
+    {
+      "name": "insurance-contracts",
+      "source": "./plugins/insurance-contracts",
+      "description": "Analyze managed-care contracts: extract rate terms, carve-outs, and auth rules; level patients; prep negotiations."
+    },
+    {
+      "name": "compliance",
+      "source": "./plugins/compliance",
+      "description": "MDS/PPS assessment calendars, PBJ deadlines, Five-Star context, survey readiness, and Plan of Correction drafting."
+    },
+    {
+      "name": "census-operations",
+      "source": "./plugins/census-operations",
+      "description": "Turn census exports into occupancy, payer-mix, and skilled-mix insight with trends, red flags, and backfill math."
+    },
+    {
+      "name": "prior-auth",
+      "source": "./plugins/prior-auth",
+      "description": "Assemble prior-auth and continued-stay packets, prep peer-to-peers, and draft appeal letters for managed-care stays."
+    },
+    {
+      "name": "eligibility",
+      "source": "./plugins/eligibility",
+      "description": "Reason through Medicare SNF benefit eligibility: qualifying stays, benefit days, coinsurance, and Medicaid-pending risk."
+    }
+  ]
+}
