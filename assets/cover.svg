@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 440" role="img" aria-labelledby="ttl desc" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title id="ttl">SNF Skills for Claude Code</title>
+  <desc id="desc">Open-source AI skill packs for skilled nursing facilities, by Magicare. A messy hospital referral packet becomes a structured decision brief through Claude.</desc>
+
+  <rect width="1280" height="440" fill="#F7F4ED"/>
+  <rect x="0.75" y="0.75" width="1278.5" height="438.5" fill="none" stroke="#E4DED2" stroke-width="1.5" rx="4"/>
+
+  <!-- Left: type -->
+  <text x="80" y="106" font-size="15" letter-spacing="3.5" font-weight="600" fill="#8A8073">OPEN-SOURCE SKILL PACKS · MIT LICENSE</text>
+
+  <text x="76" y="192" font-size="66" font-weight="700" fill="#201D18" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif">SNF Skills</text>
+  <text x="76" y="260" font-size="66" font-weight="700" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif"><tspan fill="#201D18">for </tspan><tspan fill="#C8613F">Claude Code</tspan></text>
+
+  <text x="80" y="312" font-size="23" fill="#5C554A">AI playbooks for skilled nursing facilities.</text>
+  <text x="80" y="344" font-size="16" letter-spacing="0.3" fill="#8A8073">Referral triage · PDPM · NTA capture · Contracts · Compliance · Census</text>
+
+  <text x="80" y="396" font-size="17" fill="#8A8073">by <tspan font-weight="700" fill="#201D18">Magicare</tspan><tspan fill="#8A8073"> — </tspan><tspan fill="#C8613F">magicare.ai</tspan></text>
+
+  <!-- Right: packet -> brief motif -->
+  <!-- Input packet (messy) -->
+  <g transform="rotate(-3 887 220)">
+    <rect x="812" y="126" width="150" height="188" rx="8" fill="#FCFBF7" stroke="#D3CBBB" stroke-width="1.5"/>
+    <text x="828" y="160" font-size="10.5" letter-spacing="1.5" font-weight="600" fill="#A79E8C">REFERRAL</text>
+    <rect x="828" y="176" width="116" height="7" rx="3.5" fill="#D8D1C2"/>
+    <rect x="828" y="192" width="92"  height="7" rx="3.5" fill="#D8D1C2"/>
+    <rect x="828" y="208" width="108" height="7" rx="3.5" fill="#D8D1C2"/>
+    <rect x="828" y="224" width="70"  height="7" rx="3.5" fill="#D8D1C2"/>
+    <rect x="828" y="240" width="100" height="7" rx="3.5" fill="#D8D1C2"/>
+    <rect x="828" y="256" width="84"  height="7" rx="3.5" fill="#D8D1C2"/>
+    <rect x="828" y="272" width="112" height="7" rx="3.5" fill="#D8D1C2"/>
+  </g>
+
+  <!-- Arrow + Claude spark -->
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <path d="M968 220 H1036" stroke="#201D18" stroke-width="2.2"/>
+    <path d="M1030 213 L1040 220 L1030 227" fill="none" stroke="#201D18" stroke-width="2.2"/>
+  </g>
+  <path d="M1003 188 L1006 198 L1016 201 L1006 204 L1003 214 L1000 204 L990 201 L1000 198 Z" fill="#C8613F"/>
+  <text x="1003" y="246" font-size="11" letter-spacing="1.5" font-weight="600" fill="#A79E8C" text-anchor="middle">CLAUDE</text>
+
+  <!-- Output brief (structured) -->
+  <g transform="rotate(3 1121 220)">
+    <rect x="1046" y="126" width="150" height="188" rx="8" fill="#FCFBF7" stroke="#C8613F" stroke-width="1.8"/>
+    <rect x="1062" y="150" width="58" height="8" rx="4" fill="#C8613F" opacity="0.85"/>
+    <g stroke="#C8613F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M1062 184 l6 6 l11 -14"/>
+      <path d="M1062 216 l6 6 l11 -14"/>
+      <path d="M1062 248 l6 6 l11 -14"/>
+    </g>
+    <rect x="1090" y="181" width="90" height="7" rx="3.5" fill="#2A2620"/>
+    <rect x="1090" y="213" width="74" height="7" rx="3.5" fill="#2A2620"/>
+    <rect x="1090" y="245" width="84" height="7" rx="3.5" fill="#2A2620"/>
+    <rect x="1062" y="276" width="118" height="7" rx="3.5" fill="#E0D8C8"/>
+  </g>
+</svg>

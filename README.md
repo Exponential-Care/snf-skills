@@ -1,19 +1,27 @@
-# SNF Skills for Claude Code
+<p align="center">
+  <img src="assets/cover.svg" alt="SNF Skills for Claude Code — AI playbooks for skilled nursing facilities, by Magicare" width="100%">
+</p>
 
-**Open-source AI skill packs for skilled nursing facilities.**
-Teach Claude the working knowledge of your admissions office, your MDS
-coordinator, your managed-care team, and your compliance nurse — then hand it
-the packet.
+<h1 align="center">SNF Skills for Claude Code</h1>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Claude Code](https://img.shields.io/badge/Claude_Code-plugin_marketplace-d97757.svg)](https://claude.com/claude-code)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blue.svg)](CONTRIBUTING.md)
-[![Maintained by Magicare](https://img.shields.io/badge/maintained_by-Magicare-8A2BE2.svg)](https://magicare.ai)
+<p align="center">
+  <strong>Open-source AI skill packs for skilled nursing facilities.</strong><br>
+  Teach Claude the working knowledge of your admissions office, your MDS coordinator,<br>
+  your managed-care team, and your compliance nurse — then hand it the packet.
+</p>
 
-Built and maintained by [Magicare](https://magicare.ai) as a
-public good for the post-acute community. Free for any facility, operator, or
-consultant. No product attached, no sign-up, no strings — just the domain
-knowledge, open-sourced.
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT"></a>
+  <a href="https://claude.com/claude-code"><img src="https://img.shields.io/badge/Claude_Code-plugin_marketplace-d97757.svg" alt="Claude Code"></a>
+  <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-blue.svg" alt="PRs Welcome"></a>
+  <a href="https://magicare.ai"><img src="https://img.shields.io/badge/maintained_by-Magicare-8A2BE2.svg" alt="Maintained by Magicare"></a>
+</p>
+
+<p align="center">
+  Built and maintained by <a href="https://magicare.ai">Magicare</a> as a public good for the
+  post-acute community — free for any facility, operator, or consultant.<br>
+  No product attached, no sign-up, no strings — just the domain knowledge, open-sourced.
+</p>
 
 ---
 
@@ -50,6 +58,12 @@ naturally:
 > case rate, not PDPM. **Red flags** — no H&P in the packet, med list is 4 days
 > old. **Recommendation:** conditionally accept pending auth; here's the
 > missing-documents request to send back to the case manager…
+
+## How it works
+
+<p align="center">
+  <img src="assets/how-it-works.svg" alt="Three steps: drop in a hospital packet, the matching skill activates, and Claude returns a structured brief with evidence and next steps" width="100%">
+</p>
 
 ## The packs
 
@@ -113,13 +127,16 @@ always reflect what is genuinely documented in the medical record.
 
 ## About Magicare
 
-We're the team behind **Referral Triage Pro** — AI-native referral triage and
-revenue intelligence for skilled nursing facilities
-([magicare.ai](https://magicare.ai)). We work in this industry
-every day; these skills open-source the parts of that knowledge that belong to
-everyone. If your facility wants the fully automated version — live referral
-ingestion, AI extraction, PDPM scenarios priced off your actual contracts —
-come say hi.
+[**Magicare**](https://magicare.ai) is the AI-native operating layer for skilled
+nursing facilities — live referral triage, revenue intelligence, an EHR-connected
+census, and PDPM scenarios priced against your actual payer contracts. We work in
+this industry every day, and these skills open-source the parts of that knowledge
+that belong to everyone.
+
+Want the fully automated version — referrals ingested and extracted the moment
+they arrive, your census kept live from PointClickCare, and every open bed matched
+to the right referral? That's the product.
+**[See it at magicare.ai →](https://magicare.ai)**
 
 ### Managing your census with Magicare
 

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 260" role="img" aria-labelledby="hw-t hw-d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title id="hw-t">How the skills work</title>
+  <desc id="hw-d">Three steps: drop in a hospital packet, the matching skill activates, and Claude returns a structured brief.</desc>
+
+  <rect width="1200" height="260" fill="#F7F4ED"/>
+
+  <!-- connectors -->
+  <g stroke="#D3CBBB" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 8">
+    <path d="M330 108 H470"/>
+    <path d="M730 108 H870"/>
+  </g>
+
+  <!-- Step 1: drop in the packet -->
+  <g>
+    <circle cx="200" cy="108" r="46" fill="#FCFBF7" stroke="#E4DED2" stroke-width="1.5"/>
+    <g transform="translate(178 82)">
+      <rect x="0" y="0" width="40" height="52" rx="4" fill="#F7F4ED" stroke="#5C554A" stroke-width="2"/>
+      <path d="M28 0 v12 h12" fill="none" stroke="#5C554A" stroke-width="2" stroke-linejoin="round"/>
+      <rect x="8" y="22" width="24" height="3" rx="1.5" fill="#C0B7A5"/>
+      <rect x="8" y="30" width="24" height="3" rx="1.5" fill="#C0B7A5"/>
+      <rect x="8" y="38" width="16" height="3" rx="1.5" fill="#C0B7A5"/>
+    </g>
+    <text x="200" y="192" font-size="19" font-weight="700" fill="#201D18" text-anchor="middle">Drop in the packet</text>
+    <text x="200" y="218" font-size="14.5" fill="#5C554A" text-anchor="middle">Paste or upload a referral,</text>
+    <text x="200" y="237" font-size="14.5" fill="#5C554A" text-anchor="middle">contract, or census export.</text>
+    <circle cx="238" cy="72" r="14" fill="#C8613F"/>
+    <text x="238" y="77" font-size="15" font-weight="700" fill="#FCFBF7" text-anchor="middle">1</text>
+  </g>
+
+  <!-- Step 2: the skill activates -->
+  <g>
+    <circle cx="600" cy="108" r="46" fill="#FCFBF7" stroke="#E4DED2" stroke-width="1.5"/>
+    <path d="M600 78 L606 100 L628 106 L606 112 L600 134 L594 112 L572 106 L594 100 Z" fill="#C8613F"/>
+    <text x="600" y="192" font-size="19" font-weight="700" fill="#201D18" text-anchor="middle">The skill activates</text>
+    <text x="600" y="218" font-size="14.5" fill="#5C554A" text-anchor="middle">Claude loads the matching</text>
+    <text x="600" y="237" font-size="14.5" fill="#5C554A" text-anchor="middle">playbook automatically.</text>
+    <circle cx="638" cy="72" r="14" fill="#C8613F"/>
+    <text x="638" y="77" font-size="15" font-weight="700" fill="#FCFBF7" text-anchor="middle">2</text>
+  </g>
+
+  <!-- Step 3: get a structured brief -->
+  <g>
+    <circle cx="1000" cy="108" r="46" fill="#FCFBF7" stroke="#E4DED2" stroke-width="1.5"/>
+    <g transform="translate(978 82)">
+      <rect x="0" y="0" width="44" height="52" rx="4" fill="#F7F4ED" stroke="#201D18" stroke-width="2"/>
+      <g stroke="#C8613F" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 16 l4 4 l7 -9"/>
+        <path d="M8 30 l4 4 l7 -9"/>
+        <path d="M8 44 l4 4 l7 -9"/>
+      </g>
+      <rect x="24" y="15" width="14" height="3" rx="1.5" fill="#2A2620"/>
+      <rect x="24" y="29" width="14" height="3" rx="1.5" fill="#2A2620"/>
+      <rect x="24" y="43" width="14" height="3" rx="1.5" fill="#2A2620"/>
+    </g>
+    <text x="1000" y="192" font-size="19" font-weight="700" fill="#201D18" text-anchor="middle">Get a structured brief</text>
+    <text x="1000" y="218" font-size="14.5" fill="#5C554A" text-anchor="middle">A worksheet or memo with</text>
+    <text x="1000" y="237" font-size="14.5" fill="#5C554A" text-anchor="middle">evidence and next steps.</text>
+    <circle cx="1038" cy="72" r="14" fill="#C8613F"/>
+    <text x="1038" y="77" font-size="15" font-weight="700" fill="#FCFBF7" text-anchor="middle">3</text>
+  </g>
+</svg>
