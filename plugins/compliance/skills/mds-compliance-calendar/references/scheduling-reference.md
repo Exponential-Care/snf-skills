@@ -22,7 +22,7 @@ Notes:
 
 | Assessment | Timing rule | Comprehensive? |
 |---|---|---|
-| Admission | Completed by day 14 | Yes (CAAs + care plan) |
+| Admission | Completed by day 14 | Yes (CAAs by day 14 (V0200B2); care plan within 7 days after CAA completion (V0200C2)) |
 | Quarterly | ARD ≤ 92 days after previous OBRA ARD | No |
 | Annual | ARD ≤ 366 days after most recent comprehensive ARD (and ≤ 92 days after last OBRA of any type) | Yes |
 | Significant Change (SCSA) | Completed ≤ 14 days after determination of significant change | Yes (resets comprehensive clock) |
@@ -36,7 +36,7 @@ Annual → repeat, interrupted by SCSAs as clinically indicated.
 
 | Record | Timing |
 |---|---|
-| Discharge assessment (return anticipated / not anticipated) | ARD = discharge date; complete within 14 days |
+| Discharge assessment (return anticipated / not anticipated) | ARD = discharge date; complete within 14 days after the ARD (Z0500B ≤ ARD + 14) |
 | Death in facility tracking | Complete within 14 days of death |
 | Entry tracking record | On each admission/reentry |
 

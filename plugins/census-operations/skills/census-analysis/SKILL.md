@@ -39,17 +39,22 @@ Accept either:
    file/spreadsheet tools. Typical columns: date, unit/room/bed, payer,
    admission date, and sometimes anticipated discharge date. Identify the
    date range and whether rows are resident-days or one row per resident.
+   Aggregate exports also work: one row per day with payer-count columns
+   (date, Medicare, MA, Medicaid, … , total) — no resident-level detail needed.
 2. **Typed numbers** — current census, licensed beds, counts by payer,
    admissions/discharges for the period.
 
 Always establish, asking if missing:
 
-- **Licensed beds** — the certified/licensed capacity.
+- **Licensed beds** — the state-licensed capacity. Distinguish from
+  **certified beds** (the Medicare/Medicaid-certified count), which can be
+  fewer than licensed.
 - **Operational (available) beds** — beds actually in service. These often
   differ: closed wings, rooms converted to private, staffing-limited beds,
   isolation rooms held offline. Occupancy on operational beds is the number
-  the team can actually manage to; occupancy on licensed beds is what
-  surveyors, lenders, and market reports usually reference. Compute both.
+  the team can actually manage to — lenders often use it; surveyors and CMS
+  reference certified beds; market reports usually cite licensed. Compute
+  licensed and operational at minimum.
 - **Target occupancy** (if the user has one) — needed for backfill math.
 
 If only a single day's snapshot is provided, compute point-in-time metrics and
@@ -90,6 +95,10 @@ typically means Medicare FFS + MA + other insurance paying for skilled care
 patient day in most SNFs, so it gets its own headline number — a building can
 hold total occupancy flat while quietly trading skilled days for long-term
 custodial days, which is a revenue decline hidden inside a stable census.
+Also report **FFS vs MA composition within skilled** — skilled mix alone
+scores FFS→MA substitution as flat, and it isn't. Note too that census cannot
+see PDPM/case-mix acuity, the adjacent revenue metric — flag it as a separate
+analysis, not something this brief measures.
 
 **Flow**
 
@@ -105,7 +114,9 @@ custodial days, which is a revenue decline hidden inside a stable census.
   ALOS ≈ ADC ÷ (discharges per day)
 - Report by payer. Short and shrinking skilled ALOS with flat admissions means
   fewer skilled days; note it when it appears. Label the method used —
-  the two formulas can differ materially.
+  the two formulas can differ materially. Never quote a blended (all-payer)
+  ALOS as skilled ALOS in a mixed building — long-stay custodial residents
+  swamp the average; per-payer discharge data is required.
 
 ## Step 3 — Trends
 

@@ -92,8 +92,10 @@ widespread).
 
 Key consequences to explain to users:
 
-- **D and above** requires a Plan of Correction. A/B/C generally do not (but
-  verify state practice).
+- A written Plan of Correction is required for **all deficiencies except
+  isolated A-level**. B and C (substantial-compliance levels) still require
+  an acceptable POC/approach, even though no enforcement remedies typically
+  attach (verify state practice).
 - **G and above** (actual harm) drives serious enforcement and heavy
   Five-Star health-inspection weighting.
 - **J/K/L = Immediate Jeopardy (IJ)**: noncompliance that has caused, or is

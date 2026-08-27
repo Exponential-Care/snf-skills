@@ -50,7 +50,10 @@ Extract and assess, in this order:
    need — if you cannot articulate one from the packet, flag it.
 2. **Acuity and stability** — recent ICU stay, unresolved infections, pending
    procedures, recent falls, unstable vitals mentioned in notes. A patient who is
-   not medically stable for SNF transfer is a hold, not an accept.
+   not medically stable for SNF transfer is a hold, not an accept. For very high
+   acuity (active vent weaning, ongoing instability), first ask whether the
+   patient is SNF-appropriate at all versus LTACH-level care — settle level of
+   care before capability screening.
 3. **Special care needs** — scan explicitly for each high-impact need:
    IV therapy/central lines, wound care and wound vac, dialysis, ventilator or
    tracheostomy, behavioral/psychiatric needs, bariatric accommodation, isolation
@@ -73,7 +76,10 @@ finalizing the memo — never assume capability. Phrase it concretely ("Do you h
 staff competent to manage a wound vac on all shifts?"), because "we do wound care"
 and "we can manage a wound vac 24/7" are different answers. Any need the facility
 cannot support is grounds for decline or for negotiating with the hospital (e.g.
-"accept after the picc line is removed").
+"accept after the picc line is removed"). If the user cannot confirm a
+capability in time, mark the memo "Capability: UNCONFIRMED" for that need — the
+recommendation then cannot exceed "Hold — need more information" or "Accept
+pending authorization."
 
 ## Step 3 — Financial screen
 
@@ -140,9 +146,10 @@ between the verbal report and the written record.
 
 Fill in the template below completely. Rules:
 
-- **Recommendation is one of:** Accept / Accept with conditions / Hold — need
-  more information / Decline. "Accept with conditions" must state the conditions
-  (e.g. "pending auth approval," "after picc removal").
+- **Recommendation is one of:** Accept / Accept with conditions / Accept
+  pending authorization / Hold — need more information / Decline. "Accept with
+  conditions" must state the conditions (e.g. "pending auth approval," "after
+  picc removal").
 - Every risk and every missing item identified in Steps 2–4 must appear in the
   memo — the memo is the paper trail if the decision is questioned later.
 - Keep the rationale to a few sentences a busy administrator can read in under a
@@ -185,7 +192,7 @@ functional status, disposition goal (short-term rehab vs long-term care).]
 - [ ] [Item 1]
 - [ ] [Item 2]
 
-## Recommendation: [Accept / Accept with conditions / Hold — need more information / Decline]
+## Recommendation: [Accept / Accept with conditions / Accept pending authorization / Hold — need more information / Decline]
 **Conditions (if any):** [list]
 **Rationale:** [2-4 sentences tying clinical fit + financial fit + risks to the recommendation]
 

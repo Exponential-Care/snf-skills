@@ -80,13 +80,10 @@ from the 5-day MDS (pre-admission: your translated estimate).
 
 ### Nursing function score (0–16)
 
-Same elements **excluding walking**: eating, oral hygiene, toileting hygiene,
-bed-mobility average, transfer average — but eating and oral hygiene combine
-differently in the CMS spec than a naive sum in some presentations; the widely
-used construction is eating + toileting hygiene + bed-mobility average +
-transfer average (4 elements × 4 = 0–16). **Verify the exact nursing-score
-item list against the current CMS PDPM classification walkthrough** before
-relying on a boundary case.
+Same elements **excluding walking and oral hygiene**: eating + toileting
+hygiene + bed-mobility average + transfer average (4 elements × 4 = 0–16).
+**Verify the exact nursing-score item list against the current CMS PDPM
+classification walkthrough** before relying on a boundary case.
 
 ## 3. PT and OT case-mix groups (TA–TP)
 
@@ -166,7 +163,8 @@ diagnoses), then map:
 | 1–2 | NE |
 | 0 | NF |
 
-Point values (summary of the CMS list of ~50 conditions/extensive services):
+Point values (summary of the CMS list of ~50 conditions/extensive services,
+as originally published — **verify current FY**):
 
 | Points | Examples |
 |---|---|

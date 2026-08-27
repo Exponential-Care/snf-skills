@@ -69,7 +69,7 @@ predictable places:
 
 | Where to look | What to find |
 |---|---|
-| **Medication list / MAR** | IV medications (any route = IV/IM push or infusion while a resident → O0110 IV meds, 5 pts); insulin **plus** the diabetes diagnosis it supports; immunosuppressants (tacrolimus, mycophenolate, cyclosporine) that reveal an undocumented **transplant status**; chemo agents; antiretrovirals suggesting HIV (claim-coded) |
+| **Medication list / MAR** | IV medications — O0110H counts medication given by **IV access only** (peripheral or central line, IV push or infusion), **while a resident** (5 pts); excluded: IM and SC injections, IV fluids without medication, and line flushes. Also: insulin **plus** the diabetes diagnosis it supports; immunosuppressants (tacrolimus, mycophenolate, cyclosporine) that reveal an undocumented **transplant status**; chemo agents; antiretrovirals suggesting HIV (claim-coded) |
 | **Labs** | eGFR/creatinine trends supporting CKD staging and related I8000 diagnoses; albumin/prealbumin supporting malnutrition workup (dx still required); cultures confirming MDRO or C. diff |
 | **H&P / problem list / discharge dx** | HIV/AIDS, COPD/asthma/chronic lung disease, diabetes, morbid obesity (BMI + dx), malnutrition, multiple sclerosis, IBD, lupus/connective tissue disease, epilepsy, cirrhosis/end-stage liver disease, heart/lung/kidney transplant history |
 | **Wound documentation** | Stage 4 pressure ulcer, diabetic foot ulcer, other foot infection/open lesion, wound infection, severe burns; ostomy presence |

@@ -32,7 +32,8 @@ publicly known baseline and always tell the user to **verify against the
 current MDS 3.0 RAI Manual (Chapter 2 for scheduling) and current CMS PBJ
 policy memos** before acting. State-specific assessment requirements (e.g.,
 state Medicaid case-mix OBRA rules) are out of scope here — flag them as a
-verification item, do not guess.
+verification item, do not guess. Post-2023, PDPM Medicaid case-mix states use
+the **Optional State Assessment (OSA)** — name it in that verification flag.
 
 ## Core scheduling rules (public baseline — verify current RAI manual)
 
@@ -51,12 +52,16 @@ verification item, do not guess.
   bills the **default rate** for the days of the stay not covered by a timely
   assessment. Never present a late 5-Day as merely a paperwork problem — it
   is a direct revenue loss.
+- **Medicare Advantage routing**: there is no federal PPS 5-Day for MA
+  residents; the OBRA schedule fully applies — check the plan contract for
+  its own assessment/level requirements.
 
 ### OBRA assessments (all residents regardless of payer)
 
 - **Admission (comprehensive)**: must be **completed by day 14** of the stay
-  (admission date = day 1). Includes CAAs and feeds the baseline/comprehensive
-  care plan.
+  (admission date = day 1). CAAs (V0200B2) complete by day 14; the
+  **comprehensive care plan (V0200C2) is due within 7 days after CAA
+  completion** — a separate, later deadline, not the same date.
 - **Quarterly**: ARD no later than **92 days after the ARD of the previous
   OBRA assessment**.
 - **Annual (comprehensive)**: ARD no later than **366 days after the ARD of
@@ -73,7 +78,8 @@ verification item, do not guess.
 ### Discharge and tracking
 
 - **Discharge assessments** (return anticipated / return not anticipated):
-  ARD = date of discharge; complete within 14 days.
+  ARD = date of discharge; complete within **14 days after the ARD**
+  (Z0500B ≤ ARD + 14).
 - **Death in facility** tracking record when a resident dies in the facility.
 - **Part A PPS Discharge assessment** when a Medicare Part A stay ends but the
   resident remains in the facility (may be combined with an OBRA discharge
@@ -144,9 +150,11 @@ same rating is damaged by either miss.
    most restrictive window.
 4. **Add facility-level items**: the next PBJ due date and a recommended
    internal PBJ deadline.
-5. **Flag risk**: mark any deadline within 7 days as AT RISK, any already
-   passed without a completed assessment as OVERDUE, and state the concrete
-   consequence (default rate / citation exposure / staffing-star impact).
+5. **Flag risk**: mark any deadline within 7 calendar days as AT RISK
+   (due-today counts as AT RISK until end of day), any already passed with a
+   confirmed missing assessment as OVERDUE, and any already passed where
+   completion is unknown as VERIFY-NOW, and state the concrete consequence
+   (default rate / citation exposure / staffing-star impact).
 6. **Output** using the format below, sorted by due date.
 
 ### Mode B — Audit past assessments
@@ -182,10 +190,12 @@ Rules baseline: MDS 3.0 RAI Manual (VERIFY current version) + CMS PBJ memos
 | Due date | Resident | Assessment | Window / rule | Status | Notes |
 |---|---|---|---|---|---|
 | 2026-03-09 | R. Smith | PPS 5-Day (ARD by day 8) | Days 1–8; admitted 2026-03-02 | AT RISK | Combine with OBRA Admission if ARD set by 3/9 |
-| 2026-03-15 | R. Smith | OBRA Admission (complete) | By day 14 | ON TRACK | CAAs + care plan due same date |
+| 2026-03-15 | R. Smith | OBRA Admission (complete) | By day 14 | ON TRACK | CAAs by day 14; care plan within 7 days after CAA completion |
 | 2026-05-15 | FACILITY | PBJ Q2 submission | FY quarter + 45 days | ON TRACK | Internal deadline 2026-05-01 |
 
-Status values: ON TRACK / AT RISK (≤7 days) / OVERDUE / DONE / UNVERIFIABLE
+Status values: ON TRACK / AT RISK (≤7 calendar days; due-today counts as AT
+RISK until end of day) / OVERDUE (deadline passed, assessment confirmed not
+done) / VERIFY-NOW (deadline passed, completion unknown) / DONE / UNVERIFIABLE
 
 ## Risk flags
 1. [OVERDUE] [Resident] — [assessment] due [date]: [consequence — e.g.,

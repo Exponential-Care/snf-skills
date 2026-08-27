@@ -239,8 +239,10 @@ determination. Know the window and who at the facility is responsible for
 requesting it.
 
 ### Notice of Medicare Non-Coverage (NOMNC) / plan discharge notice
-The advance notice a member must receive before covered SNF services end
-(NOMNC applies to Medicare Advantage; other products have analogous notices).
+The advance notice a member must receive before covered SNF services end.
+The NOMNC applies to **both Original Medicare and Medicare Advantage** SNF
+stays — delivered at least 2 days before covered services end, and it opens
+the beneficiary's QIO fast-track appeal.
 **Why it matters:** Delivering payer-directed end-of-coverage notices late or
 incorrectly can leave the facility holding non-covered days it cannot bill to
 anyone. Know whether the contract assigns notice delivery to the facility and

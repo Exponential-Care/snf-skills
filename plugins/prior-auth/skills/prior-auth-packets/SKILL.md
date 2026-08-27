@@ -148,11 +148,13 @@ strongest facts instead of narrating the chart. Include:
 
 - The 3–5 key clinical points that establish daily skilled need.
 - The functional delta (prior vs. current) in one line.
-- **Guideline anchors**: plans commonly apply InterQual or MCG criteria; the
-  clinician should speak to the criteria the reviewer is using — e.g., name
-  the specific skilled services, frequency, and clinical instability factors
-  those criteria weigh. If the denial cites a specific criterion, address it
-  head-on.
+- **Guideline anchors**: under CMS-4201-F, MA plans must ground SNF coverage
+  decisions in **Traditional Medicare coverage criteria** and cannot use
+  proprietary criteria (InterQual/MCG) to deny care that meets Medicare
+  criteria. Lead with the Medicare skilled-care criteria the patient meets —
+  the daily skilled service(s), frequency, and why facility-based care is
+  required — then address the plan's InterQual/MCG framework as its secondary
+  lens. If the denial cites a specific criterion, address it head-on.
 - Anticipated objections ("could be done at a lower level of care") and the
   factual rebuttal for each.
 - The specific ask: number of days requested and the review date proposed.
@@ -261,10 +263,14 @@ Prepared by: [NAME / TITLE]  Reviewed and signed by: [RESPONSIBLE CLINICIAN]
 **Days requested:** [N]
 
 ## Progress toward goals
-| Goal | Status at last review | Current status |
+| Goal | Status at last review (omit on first review) | Current status |
 |---|---|---|
 | [Goal 1] | [prior] | [current] |
 | [Goal 2] | [prior] | [current] |
+
+## Nursing status
+[Daily skilled nursing services still required — e.g., IV medications, wound
+care, assessments — and current status]
 
 ## Therapy participation
 [Disciplines, frequency delivered, minutes, tolerance; explain any missed
@@ -275,6 +281,8 @@ sessions with the clinical reason]
 
 ## Updated discharge plan
 [Destination, target date, supports, pending items]
+
+Enclosures: [LIST — updated therapy notes, nursing notes, MAR, orders]
 
 Reviewed and signed by: [RESPONSIBLE CLINICIAN]
 ```
@@ -293,7 +301,9 @@ Reviewed and signed by: [RESPONSIBLE CLINICIAN]
 
 **Functional delta:** Prior [X] → Current [Y]
 
-**Criteria anchors (InterQual/MCG or plan criteria):**
+**Criteria anchors (lead with Medicare coverage criteria per CMS-4201-F;
+InterQual/MCG as the plan's secondary framework):**
+- [Medicare skilled-care criterion → the fact that meets it]
 - [Criterion the denial cited or the reviewer will apply → the fact that meets it]
 
 **Anticipated objections / rebuttals:**

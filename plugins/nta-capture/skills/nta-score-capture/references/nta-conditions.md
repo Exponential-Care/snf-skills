@@ -8,6 +8,9 @@
 > K0510 → K0520 in the October 2023 item set). **Always confirm against the
 > current MDS RAI manual and the current FY SNF PPS final rule before coding
 > or projecting payment.** No dollar rates appear here by design.
+>
+> Point values and code lists as published in the original PDPM materials;
+> CMS revises the NTA code mappings in the annual final rule — verify every FY.
 
 Each condition/service a resident qualifies for adds its points **once**.
 Sum all points, then map to the tier table at the bottom.
@@ -17,10 +20,10 @@ Sum all points, then map to the tier table at the bottom.
 | # | Condition / Extensive Service | Points | Source |
 |---|---|---|---|
 | 1 | HIV/AIDS | 8 | SNF claim — ICD-10 code B20 on the claim (not an MDS item) |
-| 2 | Parenteral IV Feeding: Level High | 7 | K0520A (parenteral/IV feeding) + high proportion of intake by artificial route (K0710 column items) |
+| 2 | Parenteral IV Feeding: Level High | 7 | K0520A (parenteral/IV feeding) + high proportion of intake by artificial route (K0710A3/K0710B3; item availability varies by item set — verify in the current RAI manual) |
 | 3 | Special Treatments/Programs: Intravenous Medication Post-admit Code | 5 | O0110H (IV medications, while a resident) |
 | 4 | Special Treatments/Programs: Ventilator or Respirator Post-admit Code | 4 | O0110F (ventilator/respirator, while a resident) |
-| 5 | Parenteral IV Feeding: Level Low | 3 | K0520A + lower proportion of intake by artificial route (K0710 column items) |
+| 5 | Parenteral IV Feeding: Level Low | 3 | K0520A + lower proportion of intake by artificial route (K0710A3/K0710B3; item availability varies by item set — verify in the current RAI manual) |
 | 6 | Lung Transplant Status | 3 | I8000 (ICD-10) |
 | 7 | Special Treatments/Programs: Transfusion Post-admit Code | 2 | O0110I (transfusions, while a resident) |
 | 8 | Major Organ Transplant Status, Except Lung | 2 | I8000 (ICD-10) |
@@ -39,11 +42,11 @@ Sum all points, then map to the tier table at the bottom.
 | 21 | Cystic Fibrosis | 1 | I8000 (ICD-10) |
 | 22 | Special Treatments/Programs: Tracheostomy Care Post-admit Code | 1 | O0110E (tracheostomy care, while a resident) |
 | 23 | Active Diagnoses: Multi-Drug Resistant Organism (MDRO) Code | 1 | I1700 |
-| 24 | Special Treatments/Programs: Isolation Post-admit Code | 1 | O0110M (isolation/quarantine for active infectious disease, while a resident) |
+| 24 | Special Treatments/Programs: Isolation Post-admit Code | 1 | O0110M (strict single-room isolation/quarantine for active infectious disease, while a resident) |
 | 25 | Specified Hereditary Metabolic/Immune Disorders | 1 | I8000 (ICD-10) |
 | 26 | Morbid Obesity | 1 | I8000 (ICD-10) |
 | 27 | Special Treatments/Programs: Radiation Post-admit Code | 1 | O0110B (radiation, while a resident) |
-| 28 | Highest Stage of Unhealed Pressure Ulcer — Stage 4 | 1 | M0300D1 |
+| 28 | Highest Stage of Unhealed Pressure Ulcer — Stage 4 | 1 | M0300D1 (count of Stage 4 ulcers; the grouper derives highest stage from M0300 — qualifies when D1 ≥ 1) |
 | 29 | Psoriatic Arthropathy and Systemic Sclerosis | 1 | I8000 (ICD-10) |
 | 30 | Chronic Pancreatitis | 1 | I8000 (ICD-10) |
 | 31 | Proliferative Diabetic Retinopathy and Vitreous Hemorrhage | 1 | I8000 (ICD-10) |
@@ -80,7 +83,9 @@ Notes:
 - **Parenteral/IV feeding high vs. low** is distinguished by the proportion of
   total calories and fluid intake received by artificial route; check the
   current RAI manual thresholds (historically: high = 51%+ of calories, or
-  26–50% of calories with 501+ cc/day fluid; low = lesser amounts).
+  26–50% of calories with 501+ cc/day fluid; low = lesser amounts). **Do not
+  code from this summary — use the exact K0710 thresholds in the current RAI
+  manual.**
 - **HIV/AIDS** is the only NTA item drawn from the SNF claim rather than the
   MDS — coordinate with billing so B20 appears on the claim when documented.
 

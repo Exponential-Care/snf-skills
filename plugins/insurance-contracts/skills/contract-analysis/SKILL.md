@@ -350,7 +350,10 @@ that matter most, and the single most important ask.]
 ## Before the meeting
 [Data to pull: utilization by level, carve-out-eligible admissions history,
 denial/appeal outcomes under this payer, chargemaster review if lesser-of
-language exists. Facility's own data only — no external benchmarks needed.]
+language exists. Compare the proposed per-diem levels against the facility's
+own cost per patient day and its Medicare FFS PDPM yield — this skill carries
+no benchmarks, so run that comparison from the facility's numbers; do not
+skip it. Facility's own data only — no external benchmarks needed.]
 ```
 
 ---

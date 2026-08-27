@@ -127,7 +127,8 @@ Construct the PDPM function score from Section GG items (details and the
 - **PT/OT score (0–24):** 2 eating/oral hygiene/toileting-hygiene self-care
   items scored individually, plus averaged bed-mobility, transfer, and walking
   item groups.
-- **Nursing score (0–16):** same idea but **excludes walking**.
+- **Nursing score (0–16):** same idea but **excludes walking and oral
+  hygiene**.
 
 Pre-admission you rarely have true GG codes, so translate hospital therapy
 notes ("min assist x1," "supervision," "dependent," "CGA") into the 0–4 scale,
@@ -177,6 +178,11 @@ day rate = PT_base×PT_CMI×ptot_factor(day)
 using wage-adjusted base rates. Sum for total expected stay revenue; also
 report the day-1–3 rate, the day-4–20 rate, and the average per-diem over the
 expected LOS (the number most useful for comparing referrals).
+
+Footnote every estimate: these figures are **gross allowable**. Collected cash
+≈ allowable minus the **2% Medicare sequestration**, further adjusted by the
+facility's **SNF VBP incentive multiplier** — say so when the user compares
+the estimate to remittances.
 
 ### Step 7 — Present the worksheet, assumptions, and sensitivities
 

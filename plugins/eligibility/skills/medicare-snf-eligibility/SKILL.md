@@ -56,6 +56,9 @@ observation (outpatient) status. Always ask: was the patient formally admitted
 as an inpatient, and on what date did inpatient status begin? The hospital's
 Medicare Outpatient Observation Notice (MOON) and the discharge paperwork show
 status. If any of the days were observation, count only the inpatient days.
+Beneficiaries reclassified from inpatient to observation may appeal the
+reclassification (post-*Barrows v. Becerra* process); a successful appeal can
+retroactively create a qualifying stay — verify the current process.
 
 **Waivers exist — check for them.** Some ACO / shared-savings programs, other
 CMS waiver models, and many MA plans waive the 3-day requirement. If the
@@ -70,6 +73,10 @@ hospital discharge (limited medical-appropriateness exceptions exist). Compute
 the gap between hospital discharge and SNF admission. More than 30 days out,
 the qualifying stay no longer supports coverage — flag it as a hard risk.
 
+**30-day SNF readmission rule.** A readmission to a SNF within 30 days of
+discharge from a prior covered SNF stay needs NO new 3-day qualifying stay —
+the stay continues under the same benefit period, using the remaining days.
+
 ### Gate 3: Benefit days remaining
 
 Medicare covers up to 100 days of SNF care PER BENEFIT PERIOD, not per year
@@ -82,8 +89,9 @@ and not per lifetime:
   whether a Medigap/supplement or Medicaid picks it up.
 - **After day 100:** no Part A SNF coverage until a new benefit period begins.
 
-**Benefit-period mechanics.** A benefit period starts with an inpatient
-admission and ends only after the beneficiary has gone **60 consecutive days**
+**Benefit-period mechanics.** A benefit period starts with inpatient hospital
+care **or** covered SNF care (not only an inpatient hospital admission) and
+ends only after the beneficiary has gone **60 consecutive days**
 without inpatient hospital care or skilled care in a SNF. Only then does the
 100-day counter reset (a new qualifying hospital stay is also needed for the
 new period). Custodial residence in a nursing facility does not break the
@@ -98,8 +106,10 @@ report and family recollection are not reliable.
 ### Gate 4: Skilled-need requirement
 
 Coverage requires that the patient needs — and receives — **daily** skilled
-nursing or skilled rehabilitation services (therapy "daily" generally means at
-least 5 days/week) that as a practical matter can only be provided in a SNF,
+nursing or skilled rehabilitation services (skilled **nursing** on a daily
+basis means 7 days/week; daily skilled **rehabilitation** alone satisfies the
+requirement at 5+ days/week — nursing needed only 5 days/week does not
+qualify) that as a practical matter can only be provided in a SNF,
 for a condition related to the qualifying stay. Custodial care alone
 (bathing, dressing, supervision) is never covered, even with days remaining.
 Note: under the Jimmo settlement, skilled care to MAINTAIN function or prevent
