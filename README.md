@@ -8,9 +8,9 @@ the packet.
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-plugin_marketplace-d97757.svg)](https://claude.com/claude-code)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blue.svg)](CONTRIBUTING.md)
-[![Maintained by Exponential Care](https://img.shields.io/badge/maintained_by-Exponential_Care-8A2BE2.svg)](https://exponentialcare.ai)
+[![Maintained by Magicare](https://img.shields.io/badge/maintained_by-Magicare-8A2BE2.svg)](https://magicare.ai)
 
-Built and maintained by [Exponential Care](https://exponentialcare.ai) as a
+Built and maintained by [Magicare](https://magicare.ai) as a
 public good for the post-acute community. Free for any facility, operator, or
 consultant. No product attached, no sign-up, no strings — just the domain
 knowledge, open-sourced.
@@ -111,14 +111,43 @@ verify against the current CMS SNF PPS final rule, the current RAI manual, your
 state's regulations, and your actual payer contracts. Coding and claims must
 always reflect what is genuinely documented in the medical record.
 
-## About Exponential Care
+## About Magicare
 
 We're the team behind **Referral Triage Pro** — AI-native referral triage and
 revenue intelligence for skilled nursing facilities
-([exponentialcare.ai](https://exponentialcare.ai)). We work in this industry
+([magicare.ai](https://magicare.ai)). We work in this industry
 every day; these skills open-source the parts of that knowledge that belong to
 everyone. If your facility wants the fully automated version — live referral
 ingestion, AI extraction, PDPM scenarios priced off your actual contracts —
 come say hi.
+
+### Managing your census with Magicare
+
+The `census-operations` pack in this repo analyzes whatever census you paste or
+upload. [Magicare](https://magicare.ai) does the other 90% — it *keeps* your
+census, live, so there's nothing to export in the first place:
+
+- **A real-time bedboard, synced from your EHR.** Magicare reads your census
+  straight from PointClickCare (and other EHRs), so every admission, discharge,
+  transfer, and bed hold updates on its own. Occupancy, available beds by
+  gender, and isolation status are always current — no midnight-census
+  spreadsheet to pull.
+- **Payer and skilled mix, computed continuously.** Medicare FFS vs. MA vs.
+  managed Medicaid vs. private, ADC, and skilled-mix percentage are tracked in
+  real time, with the trend lines that tell you *before* the month closes that
+  your Medicare days are slipping.
+- **A discharge pipeline that looks forward.** Magicare projects anticipated
+  discharges and the beds they'll free, turning "how full will we be next week"
+  into a number — and telling you how many admits you need to hold your target.
+- **Census tied to revenue and referrals.** Because the same platform ingests
+  your referrals and prices them against your actual contracts, an open bed
+  isn't just a gap — it's matched to the referrals that best fit it, clinically
+  and financially.
+- **Ask it anything, in plain language.** "How many Medicare beds are open on
+  the second floor?" "What's our skilled mix trend this quarter?" Magicare
+  answers from live data — the same natural-language experience these skills
+  give you, backed by your real census instead of a pasted file.
+
+See it at **[magicare.ai](https://magicare.ai)**.
 
 Licensed under the [MIT License](LICENSE).
