@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Magicare MCP — Connect Claude to Your Facilities</title>
-<meta name="description" content="The Magicare MCP server and open-source SNF skills. Connect Claude Code to your facilities — manage referrals, members, and PointClickCare with the same permissions as the app." />
-<meta property="og:title" content="Magicare MCP — Connect Claude to Your Facilities" />
-<meta property="og:description" content="One token, one command. Claude Code manages your referrals, facilities, and PCC — scoped, revocable, on the record." />
+<title>SNF Skills — Open-Source AI Skills for Skilled Nursing</title>
+<meta name="description" content="Nine open-source skills teach coding agents like Claude Code, Codex, or Cursor the working knowledge of a great SNF back office — referral triage, PDPM pricing, NTA capture, contracts, compliance, prior auth, census, eligibility. Free on GitHub, one command to install." />
+<meta property="og:title" content="SNF Skills — Open-Source AI Skills for Skilled Nursing" />
+<meta property="og:description" content="Teach your agent the SNF back office: triage packets, price PDPM stays, catch missed NTA points, audit contracts. MIT licensed, free on GitHub." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2329261B'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23D97757'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -108,20 +108,15 @@
     margin-top: 20px; max-width: 56ch; font-size: 17px; line-height: 1.65; color: var(--muted);
   }
   .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-  .hero-card .term-line {
-    margin-top: 18px; padding: 11px 84px 11px 16px;
-    font-size: 12.5px; line-height: 1.5; border-radius: 12px;
-  }
-  .term-line .copy { top: 7px; right: 7px; }
-  .hero-card .stats { margin-top: 22px; }
-  .stats {
-    display: flex; flex-wrap: wrap; gap: 10px 34px; margin-top: 40px;
-    padding-top: 22px; border-top: 1px solid var(--line);
-    font-size: 13px; color: var(--muted);
-  }
-  .stats b { font-family: var(--display); font-size: 19px; color: var(--text); font-weight: 700; margin-right: 7px; }
   .drag-hint { position: absolute; top: 50%; right: 34px; z-index: 2; transform: translateY(-50%); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); writing-mode: vertical-rl; opacity: .7; }
   @media (max-width: 880px) { .drag-hint { display: none; } }
+  .hero-jobs {
+    margin-top: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px;
+    font-size: 13.5px; line-height: 1.45; color: var(--text);
+  }
+  .hero-jobs div { display: flex; gap: 9px; align-items: baseline; }
+  .hero-jobs .tick { color: var(--accent-deep); font-weight: 700; flex-shrink: 0; }
+  @media (max-width: 560px) { .hero-jobs { grid-template-columns: 1fr; } }
 
   /* ---------- Sections ---------- */
   section { max-width: 1080px; margin: 0 auto; padding: 88px 28px 8px; }
@@ -198,6 +193,30 @@
   .pack .try { font-size: 12px; line-height: 1.5; color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; font-style: italic; font-family: var(--display); }
   .oss-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: 22px; font-size: 13px; color: var(--muted); }
   .oss-row .chip { border: 1px solid var(--line); background: var(--bg-soft); border-radius: 999px; padding: 5px 12px; font-weight: 600; font-size: 12px; color: var(--text); }
+
+  /* ---------- GitHub repo showcase ---------- */
+  .repo-row { display: grid; grid-template-columns: 1.08fr 1fr; gap: 16px; margin-top: 34px; align-items: stretch; }
+  @media (max-width: 880px) { .repo-row { grid-template-columns: 1fr; } }
+  .repo-card {
+    display: flex; flex-direction: column; gap: 13px;
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px 22px 20px; transition: transform .15s, box-shadow .15s;
+  }
+  .repo-card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px -20px rgba(41,38,27,.4); }
+  .repo-head { display: flex; align-items: center; gap: 10px; }
+  .repo-head svg { flex-shrink: 0; color: var(--text); }
+  .repo-name { font-family: var(--mono); font-size: 14.5px; font-weight: 500; }
+  .repo-name b { color: var(--accent-deep); font-weight: 500; }
+  .repo-desc { font-size: 13.5px; line-height: 1.6; color: var(--muted); }
+  .repo-tree {
+    font-family: var(--mono); font-size: 12px; line-height: 1.75; color: var(--muted);
+    background: var(--bg); border: 1px solid var(--line); border-radius: 10px;
+    padding: 12px 14px; overflow-x: auto; white-space: pre;
+  }
+  .repo-tree b { color: var(--text); font-weight: 500; }
+  .repo-foot { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: auto; }
+  .repo-install { display: flex; flex-direction: column; gap: 12px; }
+  .repo-install .lbl { font-size: 11.5px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 2px 0 -6px; }
   a.arrow { font-weight: 600; color: var(--accent-deep); }
   a.arrow:hover { text-decoration: underline; }
 
@@ -235,13 +254,13 @@
 <body>
 
 <nav class="nav" id="nav">
-  <a class="brand" href="https://magicare.ai">Magicare <small>MCP · Skills</small></a>
+  <a class="brand" href="https://magicare.ai">SNF Skills <small>by Magicare</small></a>
   <div class="nav-links">
-    <a href="#connect" class="hide-sm">Connect</a>
-    <a href="#tools" class="hide-sm">Tools</a>
     <a href="#skills" class="hide-sm">Skills</a>
+    <a href="#install" class="hide-sm">Install</a>
+    <a href="#connect" class="hide-sm">Live data</a>
     <a href="#trust" class="hide-sm">Security</a>
-    <a class="btn btn-primary" href="https://app.exponentialcare.ai/cli-auth">Get your token</a>
+    <a class="btn btn-primary" href="https://github.com/Exponential-Care/snf-skills">Get the skills on GitHub</a>
   </div>
 </nav>
 
@@ -251,37 +270,100 @@
   <div class="drag-hint">Drag the world ⟲</div>
   <div class="hero-inner">
     <div class="hero-card">
-      <div class="kicker"><span class="dot"></span> Agents for healthcare administration</div>
-      <h1>Magicare, <em>in your agent.</em></h1>
+      <div class="kicker"><span class="dot"></span> Open-source skills for skilled nursing</div>
+      <h1>The whole SNF playbook, <em style="white-space:nowrap">as skills.</em></h1>
       <p class="lede">
-        Supercharge how you run your SNF with coding agents. One token
-        connects Claude Code, Codex, or any MCP-capable agent straight to
-        Magicare — pull apart an insurance contract, look at tonight's
-        census, work the referral queue, set your team's permissions, even
-        reach PointClickCare through us. Same data, same permissions, same
-        audit trail as the app.
+        Free, open-source skills that teach coding agents like Claude Code,
+        Codex, or Cursor how a great SNF back office works — admissions,
+        MDS, managed care, compliance. Paste in a packet, a contract, or a
+        census export and get the answer a seasoned coordinator would give.
       </p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary" href="#connect">Connect your agent ↓</a>
-        <a class="btn btn-ghost" href="https://github.com/Exponential-Care/snf-skills">Get the open-source skills ↗</a>
+      <div class="hero-jobs">
+        <div><span class="tick">→</span> Screen hospital packets into accept/decline memos</div>
+        <div><span class="tick">→</span> Price a stay across all six PDPM components</div>
+        <div><span class="tick">→</span> Find NTA points buried in discharge summaries</div>
+        <div><span class="tick">→</span> Flag contract clauses that quietly cost money</div>
+        <div><span class="tick">→</span> Keep MDS/PPS and PBJ calendars on schedule</div>
+        <div><span class="tick">→</span> Draft prior-auth packets and appeal letters</div>
+        <div><span class="tick">→</span> Read a month of census like an analyst</div>
+        <div><span class="tick">→</span> Check benefit days before you admit</div>
       </div>
-      <div class="term term-line" id="cmd-hero"><button class="copy" data-copy="cmd-hero">Copy</button><span class="a">/plugin</span> marketplace add Exponential-Care/snf-skills</div>
-      <div class="stats">
-        <div><b>14</b> scoped tools over MCP</div>
-        <div><b>8</b> open-source skill packs</div>
-        <div><b>1</b> command to connect</div>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="https://github.com/Exponential-Care/snf-skills">Get the skills on GitHub ↗</a>
+        <a class="btn btn-ghost" href="#skills">Browse the skills ↓</a>
       </div>
     </div>
   </div>
 </header>
 
-<section id="connect">
-  <div class="sec-head"><span class="sec-num">01</span><h2>Connect Claude to your facilities</h2></div>
+<section id="skills">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Skills for every desk in the building</h2></div>
   <p class="sec-sub">
-    The Magicare MCP server speaks the open
-    <a class="arrow" href="https://modelcontextprotocol.io">Model Context Protocol ↗</a> —
-    the standard Claude Code, Claude Desktop, Cursor, and Codex all use to
-    reach live systems. Three steps, about two minutes.
+    Each pack is a playbook for one job in the building. Install a pack and
+    Claude uses it automatically whenever your question touches that job —
+    no setup beyond the install, free for any facility, on Magicare or not.
+  </p>
+
+  <div class="packs">
+    <div class="pack"><code class="name">referral-triage</code><p>Screen a hospital packet: clinical fit, financial fit, red flags, decision memo.</p><div class="try">"Here's a packet from Example Hospital — should we take it?"</div></div>
+    <div class="pack"><code class="name">pdpm-revenue</code><p>All six PDPM components, CMG classification, variable per-diem, stay revenue.</p><div class="try">"What would Medicare pay for this admission?"</div></div>
+    <div class="pack"><code class="name">nta-capture</code><p>The full CMS NTA point list, with quoted evidence and a missed-points audit.</p><div class="try">"Find every NTA point in this discharge summary."</div></div>
+    <div class="pack"><code class="name">insurance-contracts</code><p>Extract rates, levels, carve-outs, auth rules; level patients; prep negotiations.</p><div class="try">"What should we renegotiate in this contract?"</div></div>
+    <div class="pack"><code class="name">compliance</code><p>MDS/PPS calendars, PBJ deadlines, survey readiness, Plans of Correction.</p><div class="try">"Build the assessment calendar for these admissions."</div></div>
+    <div class="pack"><code class="name">census-operations</code><p>Occupancy, payer mix, skilled mix, trends, and backfill math from raw exports.</p><div class="try">"Analyze this month's census — what should worry me?"</div></div>
+    <div class="pack"><code class="name">prior-auth</code><p>Auth packets, continued-stay reviews, peer-to-peer prep, appeal letters.</p><div class="try">"Draft the continued-stay review for this resident."</div></div>
+    <div class="pack"><code class="name">eligibility</code><p>Benefit-day math, qualifying-stay traps, MA nuances, Medicaid-pending risk.</p><div class="try">"Does this patient have benefit days left?"</div></div>
+  </div>
+
+  <div class="repo-row" id="install">
+    <a class="repo-card" href="https://github.com/Exponential-Care/snf-skills">
+      <div class="repo-head">
+        <svg viewBox="0 0 16 16" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        <span class="repo-name">Exponential-Care / <b>snf-skills</b></span>
+      </div>
+      <p class="repo-desc">
+        Every skill lives in this repo as plain, readable markdown — open
+        it, audit it, fork it, improve it. Star the repo to follow new packs.
+      </p>
+      <div class="repo-tree"><b>plugins/</b>
+├─ referral-triage/       ├─ compliance/
+├─ pdpm-revenue/          ├─ census-operations/
+├─ nta-capture/           ├─ prior-auth/
+├─ insurance-contracts/   └─ eligibility/</div>
+      <div class="repo-foot">
+        <span class="chip">MIT license</span>
+        <span class="chip">Agent Skills format</span>
+        <span class="chip">PRs welcome</span>
+        <span class="arrow" style="margin-left:auto">Browse the repo ↗</span>
+      </div>
+    </a>
+    <div class="repo-install">
+      <div class="lbl">Install — Claude Code</div>
+      <div class="term" id="cmd-skills"><button class="copy" data-copy="cmd-skills">Copy</button><span class="c"># inside Claude Code</span>
+/plugin marketplace add Exponential-Care/snf-skills
+/plugin install pdpm-revenue@snf-skills   <span class="c"># …or any pack above</span></div>
+      <div class="lbl">Install — Cursor, Codex &amp; other agents</div>
+      <div class="term" id="cmd-npx"><button class="copy" data-copy="cmd-npx">Copy</button><span class="c"># open Agent Skills format — works anywhere</span>
+npx skills add Exponential-Care/snf-skills</div>
+      <p style="font-size:13px;line-height:1.6;color:var(--muted)">
+        Each pack is independent — install one or all of them. Then just
+        work: paste in a document and the right skill loads itself.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="rule"><hr /></div>
+
+<section id="connect">
+  <div class="sec-head"><span class="sec-num">02</span><h2>On Magicare? Give the skills live data</h2></div>
+  <p class="sec-sub">
+    The skills work on whatever you paste in — no account needed. If your
+    facility uses Magicare, you can also connect Claude directly to your live
+    referrals, census, and PointClickCare, with the same permissions and audit
+    trail as the app. It runs on the open
+    <a class="arrow" href="https://modelcontextprotocol.io">Model Context Protocol ↗</a>
+    and takes about two minutes to set up.
   </p>
 
   <div class="steps">
@@ -342,11 +424,12 @@ claude mcp add --transport http magicare \
 <div class="rule"><hr /></div>
 
 <section id="tools">
-  <div class="sec-head"><span class="sec-num">02</span><h2>Fourteen tools, properly scoped</h2></div>
+  <div class="sec-head"><span class="sec-num">03</span><h2>Fourteen tools, properly scoped</h2></div>
   <p class="sec-sub">
-    Every tool enforces the same three permission axes as the Magicare app —
-    your facility scope, your org role, and your per-member permissions —
-    on the server, from your token. Nothing you type can widen them.
+    Once connected, Claude can use fourteen tools. Each one respects the same
+    permissions you already have in the Magicare app — which facilities you
+    can see, what your role allows — enforced on our servers. Nothing you
+    type can widen them.
   </p>
 
   <div class="toolgroups">
@@ -370,40 +453,6 @@ claude mcp add --transport http magicare \
       <div class="tool"><code>update_member_capabilities</code><span class="gate p">Org admin</span><span>Grant or revoke permissions per member.</span></div>
       <div class="tool"><code>assign_member_facilities</code><span class="gate p">Org admin</span><span>Set exactly which facilities a member can access.</span></div>
     </div>
-  </div>
-</section>
-
-<div class="rule"><hr /></div>
-
-<section id="skills">
-  <div class="sec-head"><span class="sec-num">03</span><h2>Open-source skills for every SNF</h2></div>
-  <p class="sec-sub">
-    We open-sourced the working knowledge of a great skilled-nursing back
-    office — PDPM, NTA capture, contracts, compliance — as Claude Code skill
-    packs. Free for any facility, on Magicare or not. MIT licensed, battle-tested
-    against fictional referral packets before release.
-  </p>
-
-  <div class="term" id="cmd-skills"><button class="copy" data-copy="cmd-skills">Copy</button><span class="c"># inside Claude Code</span>
-/plugin marketplace add Exponential-Care/snf-skills
-/plugin install pdpm-revenue@snf-skills   <span class="c"># …or any pack below</span></div>
-
-  <div class="packs">
-    <div class="pack"><code class="name">referral-triage</code><p>Screen a hospital packet: clinical fit, financial fit, red flags, decision memo.</p><div class="try">"Here's a packet from Example Hospital — should we take it?"</div></div>
-    <div class="pack"><code class="name">pdpm-revenue</code><p>All six PDPM components, CMG classification, variable per-diem, stay revenue.</p><div class="try">"What would Medicare pay for this admission?"</div></div>
-    <div class="pack"><code class="name">nta-capture</code><p>The full CMS NTA point list, with quoted evidence and a missed-points audit.</p><div class="try">"Find every NTA point in this discharge summary."</div></div>
-    <div class="pack"><code class="name">insurance-contracts</code><p>Extract rates, levels, carve-outs, auth rules; level patients; prep negotiations.</p><div class="try">"What should we renegotiate in this contract?"</div></div>
-    <div class="pack"><code class="name">compliance</code><p>MDS/PPS calendars, PBJ deadlines, survey readiness, Plans of Correction.</p><div class="try">"Build the assessment calendar for these admissions."</div></div>
-    <div class="pack"><code class="name">census-operations</code><p>Occupancy, payer mix, skilled mix, trends, and backfill math from raw exports.</p><div class="try">"Analyze this month's census — what should worry me?"</div></div>
-    <div class="pack"><code class="name">prior-auth</code><p>Auth packets, continued-stay reviews, peer-to-peer prep, appeal letters.</p><div class="try">"Draft the continued-stay review for this resident."</div></div>
-    <div class="pack"><code class="name">eligibility</code><p>Benefit-day math, qualifying-stay traps, MA nuances, Medicaid-pending risk.</p><div class="try">"Does this patient have benefit days left?"</div></div>
-  </div>
-
-  <div class="oss-row">
-    <span class="chip">MIT license</span>
-    <span class="chip">No sign-up</span>
-    <span class="chip">PRs welcome</span>
-    <a class="arrow" href="https://github.com/Exponential-Care/snf-skills">github.com/Exponential-Care/snf-skills ↗</a>
   </div>
 </section>
 
@@ -434,34 +483,37 @@ claude mcp add --transport http magicare \
 
 <section id="prompts">
   <div class="sec-head"><span class="sec-num">05</span><h2>Things people actually ask</h2></div>
+  <p class="sec-sub">The first two need nothing but a pasted document. The last two use a live Magicare connection.</p>
   <div class="chats">
-    <div class="chat"><div class="q">"Which of my facilities have open referrals right now?"</div><div class="r"><b>Claude</b> calls <b>referral_status_counts</b>, then breaks the queue down per building with what's aging.</div></div>
-    <div class="chat"><div class="q">"Accept the referral for John D. at Riverside and push him into PCC."</div><div class="r"><b>Claude</b> confirms the match, calls <b>update_referral_status</b>, then <b>pcc_create_pending_patient</b> — each gated on your permissions.</div></div>
-    <div class="chat"><div class="q">"Give Jane analytics access and assign her to our two Birmingham buildings."</div><div class="r"><b>Claude</b> calls <b>update_member_capabilities</b> and <b>assign_member_facilities</b> — org admins only.</div></div>
-    <div class="chat"><div class="q">"How many open beds tonight, and what's our male/female availability?"</div><div class="r"><b>Claude</b> reads the <b>pcc_bedboard</b> snapshot — occupancy, isolation beds, gender availability, freshness timestamp.</div></div>
+    <div class="chat"><div class="q">"Here's the discharge summary — what NTA points are we missing?"</div><div class="r">The <b>nta-capture</b> skill loads, walks the full CMS point list against the record, and quotes the evidence line for every point it finds — plus the ones documentation almost supports.</div></div>
+    <div class="chat"><div class="q">"What would Medicare actually pay for this admission?"</div><div class="r">The <b>pdpm-revenue</b> skill classifies all six PDPM components, applies the variable per-diem schedule, and lays out expected revenue for the stay.</div></div>
+    <div class="chat"><div class="q">"Which of my facilities have open referrals right now?"</div><div class="r">With MCP connected, <b>Claude</b> calls <b>referral_status_counts</b> and breaks the queue down per building with what's aging.</div></div>
+    <div class="chat"><div class="q">"Accept the referral for John D. at Riverside and push him into PCC."</div><div class="r">With MCP connected, <b>Claude</b> confirms the match, calls <b>update_referral_status</b>, then <b>pcc_create_pending_patient</b> — each gated on your permissions.</div></div>
   </div>
 </section>
 
 <footer>
   <div class="foot-inner">
-    <div class="foot-brand">Magicare
-      <small>The AI operating system for post-acute care, by Exponential Care. Not a roadmap — production.</small>
+    <div class="foot-brand">SNF Skills
+      <small>Open-source skills for skilled nursing, maintained by Magicare — the AI operating system for post-acute care, by Exponential Care.</small>
     </div>
     <div class="foot-links">
       <div>
-        <span>Product</span>
-        <a href="https://app.exponentialcare.ai">Magicare app ↗</a>
-        <a href="https://app.exponentialcare.ai/cli-auth">Get a token ↗</a>
-        <a href="https://story.magicare.ai">The Magicare story ↗</a>
-      </div>
-      <div>
         <span>Open source</span>
         <a href="https://github.com/Exponential-Care/snf-skills">snf-skills on GitHub ↗</a>
+        <a href="https://github.com/Exponential-Care/snf-skills/blob/main/CONTRIBUTING.md">Contribute a skill ↗</a>
+        <a href="https://github.com/Exponential-Care/snf-skills/issues">Report an issue ↗</a>
+      </div>
+      <div>
+        <span>Product</span>
+        <a href="https://app.exponentialcare.ai">Magicare app ↗</a>
+        <a href="https://app.exponentialcare.ai/cli-auth">Get an MCP token ↗</a>
         <a href="https://modelcontextprotocol.io">Model Context Protocol ↗</a>
       </div>
       <div>
         <span>Company</span>
         <a href="https://magicare.ai">magicare.ai ↗</a>
+        <a href="https://story.magicare.ai">The Magicare story ↗</a>
         <a href="mailto:hello@magicare.ai">Get in touch ↗</a>
       </div>
     </div>
