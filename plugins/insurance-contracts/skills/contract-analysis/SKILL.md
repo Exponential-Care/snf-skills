@@ -1,5 +1,6 @@
 ---
 name: contract-analysis
+license: MIT
 description: >-
   Analyze skilled nursing facility (SNF) managed-care contracts: extract terms
   into a structured contract summary sheet, level patients against a contract's

@@ -1,5 +1,6 @@
 ---
 name: pdpm-estimate
+license: MIT
 description: >-
   Estimate the Medicare Fee-for-Service PDPM per-diem rate and total stay
   revenue for a SNF admission from referral documentation (hospital packet,
@@ -150,7 +151,7 @@ Using [references/pdpm-components.md](references/pdpm-components.md):
    nursing function score, depression, and restorative splits.
 4. **NTA:** sum comorbidity/service points, map to tier NA–NF. (For a
    documentation-capture workflow that maximizes *legitimately supported* NTA
-   points, see the `nta-capture` skill in this plugin pack if installed.)
+   points, see the companion `nta-score-capture` skill if installed.)
 5. Record the CMI for each group from the user's current-FY final rule tables.
 
 ### Step 6 — Apply variable per-diem adjustments and compute the curve

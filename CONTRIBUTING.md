@@ -23,9 +23,17 @@ Thanks for helping make these skills better. Contributions we love:
    reinforce that codes and claims reflect what is genuinely documented.
 5. **Keep the skill format.** Each skill lives at
    `plugins/<pack>/skills/<skill-name>/SKILL.md` with YAML frontmatter
-   (`name`, `description`), an imperative workflow body under ~450 lines, long
+   (`name` in kebab-case matching the directory, `description` under 1024
+   characters, `license`), an imperative workflow body under ~450 lines, long
    reference tables in a `references/` folder beside it, and a closing
-   `## Disclaimer` section.
+   `## Disclaimer` section. This is the open
+   [Agent Skills](https://agentskills.io) format, so the repo stays
+   installable both as Claude Code plugins and via `npx skills add` — don't
+   add frontmatter fields outside that spec.
+6. **Skills must stand alone.** Users can install a single skill without the
+   rest of the repo (e.g. via the skills CLI), so refer to other skills as
+   "the companion `<skill-name>` skill (if installed)" — never assume the
+   whole marketplace is present.
 
 ## Testing a change
 
@@ -38,7 +46,8 @@ From a checkout, add the local marketplace and install your pack:
 
 Then run a realistic prompt against it (a fictional referral packet, a sample
 contract) and check the output. `claude plugin validate ./plugins/<pack>` catches
-manifest problems.
+manifest problems, and `npx skills add . --list` from the repo root confirms
+every skill is still discoverable by the open-format skills CLI.
 
 ## License
 

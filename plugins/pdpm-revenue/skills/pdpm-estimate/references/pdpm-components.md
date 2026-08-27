@@ -177,9 +177,9 @@ as originally published — **verify current FY**):
 | 1 | The long tail — e.g., diabetes mellitus, wound infection, COPD/asthma, stage 4 pressure ulcer, feeding tube, morbid obesity, ostomy care, radiation, chemotherapy while a resident, dialysis, multi-drug-resistant organism, and others |
 
 The full CMS list, its MDS item sources, and per-condition capture guidance
-are beyond this summary — **see the `nta-capture` pack in this plugin for the
-detailed capture workflow**, and verify point values against the current CMS
-PDPM classification walkthrough.
+are beyond this summary — **see the companion `nta-score-capture` skill (if
+installed) for the detailed capture workflow**, and verify point values
+against the current CMS PDPM classification walkthrough.
 
 ## 7. Where the numbers come from each year
 
