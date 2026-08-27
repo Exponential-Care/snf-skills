@@ -182,8 +182,8 @@ points and only while a resident** — a transfusion given in the hospital
 before SNF admission earns nothing.
 
 The full CMS list, its MDS item sources, and per-condition capture guidance
-are beyond this summary — **install the `nta-capture` pack from this
-marketplace for the complete table and capture workflow**, and verify point
+are beyond this summary — **see the companion `nta-score-capture` skill (if
+installed) for the complete table and capture workflow**, and verify point
 values against the current CMS PDPM classification walkthrough / RAI manual.
 
 ## 7. Where the numbers come from each year

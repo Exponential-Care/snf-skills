@@ -1,5 +1,6 @@
 ---
 name: referral-packet-review
+license: MIT
 description: Screen an inbound hospital referral packet for a skilled nursing facility (SNF) and produce a structured accept/decline decision memo covering clinical fit, financial fit, red flags, and missing documents. Use whenever the user mentions a referral, hospital packet, discharge packet, admission decision, "should we take this patient", clinical or financial screening of a prospective admission, or asks to review documents sent by a hospital discharge planner or case manager. Also use when the user pastes clinical text (H&P, discharge summary, med list) and wants an admission recommendation or a list of what to request back from the hospital.
 ---
 
@@ -109,8 +110,8 @@ pending authorization."
 5. **Reimbursement drivers** — for Medicare FFS, payment follows PDPM: the
    clinical picture (primary diagnosis mapping, nursing needs, NTA comorbidities,
    function scores) determines the per-diem. Note in the memo which packet facts
-   are likely PDPM-relevant. For a deeper analysis, the **pdpm-estimate** and
-   **nta-score-capture** skills from this marketplace (if installed) can build a
+   are likely PDPM-relevant. For a deeper analysis, the companion
+   **pdpm-estimate** and **nta-score-capture** skills (if installed) can build a
    component-level estimate — suggest them rather than estimating rates yourself.
    Never state dollar figures for rates; refer the user to the current CMS SNF
    PPS final rule, their MAC, or their contracts for numbers.

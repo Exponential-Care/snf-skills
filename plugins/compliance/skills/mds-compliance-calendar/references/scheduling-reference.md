@@ -58,12 +58,6 @@ Annual → repeat, interrupted by SCSAs as clinically indicated.
 
 ## PBJ baseline deadlines
 
-Federal fiscal quarters, due 45 days after quarter end. Confirm each cycle on
-CMS's PBJ page — dates shift for weekends/holidays and occasional extensions.
-
-| Quarter | Covers | Baseline due |
-|---|---|---|
-| FY Q1 | Oct–Dec | Feb 14 |
-| FY Q2 | Jan–Mar | May 15 |
-| FY Q3 | Apr–Jun | Aug 14 |
-| FY Q4 | Jul–Sep | Nov 14 |
+See the PBJ table in SKILL.md (federal fiscal quarters, due 45 days after
+quarter end). Confirm each cycle on CMS's PBJ page — dates shift for
+weekends/holidays and occasional extensions.

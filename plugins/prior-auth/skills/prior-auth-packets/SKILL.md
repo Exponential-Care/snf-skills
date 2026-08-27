@@ -1,5 +1,6 @@
 ---
 name: prior-auth-packets
+license: MIT
 description: >-
   Assembles Medicare Advantage / managed-care authorization work products for
   skilled nursing facility (SNF) stays: initial prior-auth packets with

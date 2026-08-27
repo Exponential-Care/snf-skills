@@ -1,5 +1,6 @@
 ---
 name: mds-compliance-calendar
+license: MIT
 description: >-
   Builds and audits a skilled nursing facility's MDS assessment and regulatory
   reporting calendar: PPS 5-day and IPA windows, the OBRA schedule (admission,

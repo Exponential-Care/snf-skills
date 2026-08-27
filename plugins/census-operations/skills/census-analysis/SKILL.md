@@ -1,5 +1,6 @@
 ---
 name: census-analysis
+license: MIT
 description: >-
   Turns raw SNF census data (daily/midnight census exports or hand-typed
   numbers) into an operational census brief: occupancy, ADC and payer mix,
