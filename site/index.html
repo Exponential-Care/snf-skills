@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Magicare MCP — Connect Claude to Your Facilities</title>
+<meta name="description" content="The Magicare MCP server and open-source SNF skills. Connect Claude Code to your facilities — manage referrals, members, and PointClickCare with the same permissions as the app." />
+<meta property="og:title" content="Magicare MCP — Connect Claude to Your Facilities" />
+<meta property="og:description" content="One token, one command. Claude Code manages your referrals, facilities, and PCC — scoped, revocable, on the record." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2329261B'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23D97757'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #F0EEE6;
+    --bg-soft: #FAF9F5;
+    --panel: rgba(255, 253, 248, 0.88);
+    --line: rgba(41, 38, 27, 0.12);
+    --text: #29261B;
+    --muted: #6e6a5e;
+    --accent: #D97757;
+    --accent-deep: #c05f3c;
+    --accent-soft: rgba(217, 119, 87, 0.12);
+    --gold: #b7791f;
+    --green: #2f9e73;
+    --purple: #7d6bb8;
+    --red: #c0455a;
+    --radius: 16px;
+    --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --display: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+    --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: rgba(217, 119, 87, 0.3); }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 28px;
+    background: linear-gradient(180deg, rgba(240, 238, 230, 0.94), rgba(240, 238, 230, 0.6) 70%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .3s, background .3s;
+  }
+  .nav.scrolled { border-bottom-color: var(--line); background: rgba(250, 249, 245, 0.92); }
+  .brand { display: flex; align-items: baseline; gap: 10px; font-family: var(--display); font-weight: 700; font-size: 19px; letter-spacing: .2px; }
+  .brand small { color: var(--muted); font-family: var(--font); font-weight: 500; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+  .nav-links { display: flex; align-items: center; gap: 26px; font-size: 14px; color: var(--muted); font-weight: 500; }
+  .nav-links a:hover { color: var(--text); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    border-radius: 999px; padding: 9px 18px;
+    font-weight: 600; font-size: 13.5px; cursor: pointer; border: 0;
+    transition: background .2s;
+    font-family: var(--font);
+  }
+  .btn-primary { background: var(--accent); color: #fffdf8; }
+  .btn-primary:hover { background: var(--accent-deep); }
+  .btn-ghost { background: rgba(255, 253, 248, 0.8); color: var(--text); border: 1px solid var(--line); }
+  .btn-ghost:hover { background: #fffdf8; }
+  @media (max-width: 720px) { .nav-links a.hide-sm { display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; }
+  #world { position: absolute; inset: 0; z-index: 0; }
+  #world canvas { display: block; }
+  .hero-veil {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(180deg, rgba(240,238,230,.25) 0%, rgba(240,238,230,0) 30%, rgba(240,238,230,0) 55%, rgba(240,238,230,.92) 88%, var(--bg) 100%);
+  }
+  .hero-inner {
+    position: relative; z-index: 2; width: 100%;
+    max-width: 1080px; margin: 0 auto; padding: 0 28px 64px;
+  }
+  .hero-card {
+    display: inline-block; max-width: 640px;
+    background: rgba(250, 249, 245, 0.78);
+    border: 1px solid var(--line); border-radius: 20px;
+    padding: 28px 30px 26px;
+    backdrop-filter: blur(9px); -webkit-backdrop-filter: blur(9px);
+    box-shadow: 0 18px 50px -32px rgba(41, 38, 27, 0.4);
+  }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+    margin-bottom: 18px;
+  }
+  .kicker .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  h1 {
+    font-family: var(--display); font-weight: 600;
+    font-size: clamp(38px, 6vw, 66px); line-height: 1.06; letter-spacing: -0.01em;
+    max-width: 15ch;
+  }
+  h1 em { font-style: italic; color: var(--accent-deep); }
+  .hero p.lede {
+    margin-top: 20px; max-width: 56ch; font-size: 17px; line-height: 1.65; color: var(--muted);
+  }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .hero-card .stats { margin-top: 26px; }
+  .stats {
+    display: flex; flex-wrap: wrap; gap: 10px 34px; margin-top: 40px;
+    padding-top: 22px; border-top: 1px solid var(--line);
+    font-size: 13px; color: var(--muted);
+  }
+  .stats b { font-family: var(--display); font-size: 19px; color: var(--text); font-weight: 700; margin-right: 7px; }
+  .drag-hint { position: absolute; top: 50%; right: 34px; z-index: 2; transform: translateY(-50%); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); writing-mode: vertical-rl; opacity: .7; }
+  @media (max-width: 880px) { .drag-hint { display: none; } }
+
+  /* ---------- Sections ---------- */
+  section { max-width: 1080px; margin: 0 auto; padding: 88px 28px 8px; }
+  .sec-head { display: flex; align-items: baseline; gap: 18px; margin-bottom: 14px; }
+  .sec-num { font-family: var(--mono); font-size: 13px; color: var(--accent-deep); letter-spacing: .06em; }
+  h2 { font-family: var(--display); font-weight: 600; font-size: clamp(27px, 3.6vw, 38px); letter-spacing: -0.01em; }
+  .sec-sub { color: var(--muted); font-size: 16px; line-height: 1.65; max-width: 66ch; margin-bottom: 36px; }
+  .rule { max-width: 1080px; margin: 88px auto 0; padding: 0 28px; }
+  .rule hr { border: 0; border-top: 1px solid var(--line); }
+
+  /* ---------- Step cards ---------- */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 880px) { .steps { grid-template-columns: 1fr; } }
+  .step {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .step .n { font-family: var(--mono); font-size: 12px; color: var(--accent-deep); }
+  .step h3 { font-family: var(--display); font-size: 20px; font-weight: 600; }
+  .step p { font-size: 14px; line-height: 1.6; color: var(--muted); }
+  .step a.textlink { color: var(--accent-deep); font-weight: 600; }
+  .step a.textlink:hover { text-decoration: underline; }
+
+  /* ---------- Terminal blocks ---------- */
+  .term {
+    position: relative; background: #29261B; color: #f1ece0;
+    border-radius: 14px; padding: 16px 52px 16px 18px;
+    font-family: var(--mono); font-size: 12.8px; line-height: 1.7;
+    overflow-x: auto; white-space: pre; margin-top: 4px;
+  }
+  .term .c { color: #8a8578; }
+  .term .a { color: #e0b09a; }
+  .term .g { color: #a3c48b; }
+  .copy {
+    position: absolute; top: 10px; right: 10px;
+    background: rgba(250, 249, 245, 0.1); color: #d6cdb4;
+    border: 1px solid rgba(250, 249, 245, 0.18); border-radius: 8px;
+    font-family: var(--font); font-size: 11.5px; font-weight: 600;
+    padding: 5px 10px; cursor: pointer; transition: background .15s;
+  }
+  .copy:hover { background: rgba(250, 249, 245, 0.2); }
+  .copy.ok { color: #a3c48b; border-color: rgba(163, 196, 139, .5); }
+  details.alt { margin-top: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg-soft); }
+  details.alt summary { cursor: pointer; padding: 12px 16px; font-size: 13.5px; font-weight: 600; color: var(--muted); list-style: none; }
+  details.alt summary::before { content: "+ "; color: var(--accent-deep); }
+  details.alt[open] summary::before { content: "– "; }
+  details.alt .inner { padding: 0 16px 16px; }
+
+  /* ---------- Tool grid ---------- */
+  .toolgroups { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
+  @media (max-width: 880px) { .toolgroups { grid-template-columns: 1fr; } }
+  .toolgroup { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+  .toolgroup h4 { display: flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .toolgroup h4 .pip { width: 8px; height: 8px; border-radius: 50%; }
+  .pip.read { background: var(--green); } .pip.act { background: var(--accent); } .pip.admin { background: var(--purple); }
+  .tool { padding: 8px 0; border-top: 1px dashed var(--line); }
+  .tool:first-of-type { border-top: 0; }
+  .tool code { font-family: var(--mono); font-size: 12.5px; font-weight: 500; color: var(--text); }
+  .tool span { display: block; font-size: 12.5px; color: var(--muted); line-height: 1.5; margin-top: 2px; }
+  .gate { display: inline-block; margin-left: 6px; font-size: 10px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--accent-deep); background: var(--accent-soft); border-radius: 999px; padding: 2px 7px; vertical-align: 1px; }
+  .gate.p { color: var(--purple); background: rgba(125, 107, 184, .12); }
+
+  /* ---------- Skill packs ---------- */
+  .packs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 34px; }
+  @media (max-width: 1000px) { .packs { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .packs { grid-template-columns: 1fr; } }
+  .pack {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px; display: flex; flex-direction: column; gap: 8px; transition: transform .15s, box-shadow .15s;
+  }
+  .pack:hover { transform: translateY(-2px); box-shadow: 0 10px 28px -18px rgba(41,38,27,.35); }
+  .pack code.name { font-family: var(--mono); font-size: 12.5px; color: var(--accent-deep); font-weight: 500; }
+  .pack p { font-size: 13px; line-height: 1.55; color: var(--muted); flex: 1; }
+  .pack .try { font-size: 12px; line-height: 1.5; color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; font-style: italic; font-family: var(--display); }
+  .oss-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: 22px; font-size: 13px; color: var(--muted); }
+  .oss-row .chip { border: 1px solid var(--line); background: var(--bg-soft); border-radius: 999px; padding: 5px 12px; font-weight: 600; font-size: 12px; color: var(--text); }
+  a.arrow { font-weight: 600; color: var(--accent-deep); }
+  a.arrow:hover { text-decoration: underline; }
+
+  /* ---------- Trust tiles ---------- */
+  .trust { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 34px; }
+  @media (max-width: 1000px) { .trust { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .trust { grid-template-columns: 1fr; } }
+  .trust .tile { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; }
+  .tile h5 { font-family: var(--display); font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+  .tile p { font-size: 13px; line-height: 1.6; color: var(--muted); }
+  .phi { margin-top: 22px; font-size: 13.5px; line-height: 1.65; color: var(--muted); border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; max-width: 76ch; }
+
+  /* ---------- Prompts ---------- */
+  .chats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 34px; }
+  @media (max-width: 880px) { .chats { grid-template-columns: 1fr; } }
+  .chat { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; }
+  .chat .q { font-family: var(--display); font-style: italic; font-size: 16px; line-height: 1.5; }
+  .chat .r { margin-top: 10px; font-size: 13px; line-height: 1.6; color: var(--muted); }
+  .chat .r b { color: var(--text); }
+
+  /* ---------- Footer ---------- */
+  footer { margin-top: 96px; border-top: 1px solid var(--line); background: var(--bg-soft); }
+  .foot-inner { max-width: 1080px; margin: 0 auto; padding: 44px 28px 54px; display: flex; flex-wrap: wrap; gap: 26px 60px; justify-content: space-between; }
+  .foot-brand { font-family: var(--display); font-weight: 700; font-size: 18px; }
+  .foot-brand small { display: block; margin-top: 6px; font-family: var(--font); font-weight: 400; font-size: 12.5px; color: var(--muted); max-width: 40ch; line-height: 1.6; }
+  .foot-links { display: flex; gap: 44px; }
+  .foot-links div { display: flex; flex-direction: column; gap: 9px; font-size: 13.5px; }
+  .foot-links span { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+  .foot-links a { color: var(--muted); } .foot-links a:hover { color: var(--text); }
+  .fine { max-width: 1080px; margin: 0 auto; padding: 0 28px 40px; font-size: 11.5px; line-height: 1.7; color: var(--muted); }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a class="brand" href="https://magicare.ai">Magicare <small>MCP · Skills</small></a>
+  <div class="nav-links">
+    <a href="#connect" class="hide-sm">Connect</a>
+    <a href="#tools" class="hide-sm">Tools</a>
+    <a href="#skills" class="hide-sm">Skills</a>
+    <a href="#trust" class="hide-sm">Security</a>
+    <a class="btn btn-primary" href="https://app.exponentialcare.ai/cli-auth">Get your token</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div id="world" aria-hidden="true"></div>
+  <div class="hero-veil"></div>
+  <div class="drag-hint">Drag the world ⟲</div>
+  <div class="hero-inner">
+    <div class="hero-card">
+      <div class="kicker"><span class="dot"></span> Agents for healthcare administration</div>
+      <h1>Magicare, <em>in your agent.</em></h1>
+      <p class="lede">
+        Supercharge how you run your SNF with coding agents. One token
+        connects Claude Code, Codex, or any MCP-capable agent straight to
+        Magicare — pull apart an insurance contract, look at tonight's
+        census, work the referral queue, set your team's permissions, even
+        reach PointClickCare through us. Same data, same permissions, same
+        audit trail as the app.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#connect">Connect your agent ↓</a>
+        <a class="btn btn-ghost" href="https://github.com/Exponential-Care/snf-skills">Get the open-source skills ↗</a>
+      </div>
+      <div class="stats">
+        <div><b>14</b> scoped tools over MCP</div>
+        <div><b>8</b> open-source skill packs</div>
+        <div><b>1</b> command to connect</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="connect">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Connect Claude to your facilities</h2></div>
+  <p class="sec-sub">
+    The Magicare MCP server speaks the open
+    <a class="arrow" href="https://modelcontextprotocol.io">Model Context Protocol ↗</a> —
+    the standard Claude Code, Claude Desktop, Cursor, and Codex all use to
+    reach live systems. Three steps, about two minutes.
+  </p>
+
+  <div class="steps">
+    <div class="step">
+      <span class="n">STEP 1</span>
+      <h3>Get your token</h3>
+      <p>
+        Sign in to Magicare, then open
+        <a class="textlink" href="https://app.exponentialcare.ai/cli-auth">app.exponentialcare.ai/cli-auth</a>
+        and click <b>Generate CLI token</b>. It starts with <code style="font-family:var(--mono)">magi_</code>.
+        Treat it like a password — you can revoke it on the same page anytime.
+      </p>
+    </div>
+    <div class="step">
+      <span class="n">STEP 2</span>
+      <h3>Add the server</h3>
+      <p>Paste one command into your terminal (Claude Code). Desktop and Cursor configs are below.</p>
+    </div>
+    <div class="step">
+      <span class="n">STEP 3</span>
+      <h3>Just talk</h3>
+      <p>
+        Ask <i style="font-family:var(--display)">"who am I and which facilities can I see?"</i> —
+        Claude calls <code style="font-family:var(--mono)">whoami</code> and you're live.
+        Everything is scoped to you, server-side.
+      </p>
+    </div>
+  </div>
+
+  <div class="term" style="margin-top:16px" id="cmd-mcp"><button class="copy" data-copy="cmd-mcp">Copy</button><span class="c"># Claude Code — one line</span>
+claude mcp add --transport http magicare \
+  https://app.exponentialcare.ai/api/mcp/org \
+  --header <span class="a">"Authorization: Bearer magi_YOUR_TOKEN"</span></div>
+
+  <details class="alt">
+    <summary>Claude Desktop, Cursor, Codex, or a project .mcp.json</summary>
+    <div class="inner">
+      <div class="term" id="cmd-json"><button class="copy" data-copy="cmd-json">Copy</button><span class="c"># .mcp.json — keep the token in an env var, not in the file</span>
+{
+  <span class="g">"mcpServers"</span>: {
+    <span class="g">"magicare"</span>: {
+      <span class="g">"type"</span>: <span class="a">"http"</span>,
+      <span class="g">"url"</span>: <span class="a">"https://app.exponentialcare.ai/api/mcp/org"</span>,
+      <span class="g">"headers"</span>: { <span class="g">"Authorization"</span>: <span class="a">"Bearer ${MAGICARE_CLI_TOKEN}"</span> }
+    }
+  }
+}</div>
+      <p style="margin-top:12px;font-size:13px;line-height:1.6;color:var(--muted)">
+        <b>Codex or another MCP-capable agent?</b> Point it at the same URL with
+        the same <code style="font-family:var(--mono);font-size:12px">Authorization</code>
+        header — streamable HTTP transport, nothing else to configure. See your
+        agent's MCP docs for where its server list lives.
+      </p>
+    </div>
+  </details>
+</section>
+
+<div class="rule"><hr /></div>
+
+<section id="tools">
+  <div class="sec-head"><span class="sec-num">02</span><h2>Fourteen tools, properly scoped</h2></div>
+  <p class="sec-sub">
+    Every tool enforces the same three permission axes as the Magicare app —
+    your facility scope, your org role, and your per-member permissions —
+    on the server, from your token. Nothing you type can widen them.
+  </p>
+
+  <div class="toolgroups">
+    <div class="toolgroup">
+      <h4><span class="pip read"></span> Read — every member</h4>
+      <div class="tool"><code>whoami</code><span>Your identity, role, permissions, facilities. Start here.</span></div>
+      <div class="tool"><code>list_facilities</code> / <code>get_facility</code><span>Profiles and EHR-connection status.</span></div>
+      <div class="tool"><code>list_referrals</code> / <code>get_referral</code><span>Search and read referrals — status, insurance, the whole record.</span></div>
+      <div class="tool"><code>referral_status_counts</code><span>Your pipeline, grouped by workflow status.</span></div>
+      <div class="tool"><code>pcc_bedboard</code> / <code>pcc_patients</code><span>Census snapshots and patient lists from PointClickCare — through us.</span></div>
+    </div>
+    <div class="toolgroup">
+      <h4><span class="pip act"></span> Act — permission-gated</h4>
+      <div class="tool"><code>update_referral_status</code><span class="gate">Change Status</span><span>Accept, reject, bed-hold, admit. Attributed to you, written to the status log.</span></div>
+      <div class="tool"><code>pcc_create_pending_patient</code><span class="gate">Create PCC Patient</span><span>Push a referral's extracted patient into PointClickCare as a pending patient.</span></div>
+    </div>
+    <div class="toolgroup">
+      <h4><span class="pip admin"></span> Manage — org admins</h4>
+      <div class="tool"><code>update_facility</code><span class="gate p">Org admin</span><span>Contact and profile fields — email, phone, notes, address.</span></div>
+      <div class="tool"><code>list_members</code><span class="gate p">Org admin</span><span>Your team, their roles, permissions, and facility assignments.</span></div>
+      <div class="tool"><code>update_member_capabilities</code><span class="gate p">Org admin</span><span>Grant or revoke permissions per member.</span></div>
+      <div class="tool"><code>assign_member_facilities</code><span class="gate p">Org admin</span><span>Set exactly which facilities a member can access.</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"><hr /></div>
+
+<section id="skills">
+  <div class="sec-head"><span class="sec-num">03</span><h2>Open-source skills for every SNF</h2></div>
+  <p class="sec-sub">
+    We open-sourced the working knowledge of a great skilled-nursing back
+    office — PDPM, NTA capture, contracts, compliance — as Claude Code skill
+    packs. Free for any facility, on Magicare or not. MIT licensed, battle-tested
+    against fictional referral packets before release.
+  </p>
+
+  <div class="term" id="cmd-skills"><button class="copy" data-copy="cmd-skills">Copy</button><span class="c"># inside Claude Code</span>
+/plugin marketplace add Exponential-Care/snf-skills
+/plugin install pdpm-revenue@snf-skills   <span class="c"># …or any pack below</span></div>
+
+  <div class="packs">
+    <div class="pack"><code class="name">referral-triage</code><p>Screen a hospital packet: clinical fit, financial fit, red flags, decision memo.</p><div class="try">"Here's a packet from Example Hospital — should we take it?"</div></div>
+    <div class="pack"><code class="name">pdpm-revenue</code><p>All six PDPM components, CMG classification, variable per-diem, stay revenue.</p><div class="try">"What would Medicare pay for this admission?"</div></div>
+    <div class="pack"><code class="name">nta-capture</code><p>The full CMS NTA point list, with quoted evidence and a missed-points audit.</p><div class="try">"Find every NTA point in this discharge summary."</div></div>
+    <div class="pack"><code class="name">insurance-contracts</code><p>Extract rates, levels, carve-outs, auth rules; level patients; prep negotiations.</p><div class="try">"What should we renegotiate in this contract?"</div></div>
+    <div class="pack"><code class="name">compliance</code><p>MDS/PPS calendars, PBJ deadlines, survey readiness, Plans of Correction.</p><div class="try">"Build the assessment calendar for these admissions."</div></div>
+    <div class="pack"><code class="name">census-operations</code><p>Occupancy, payer mix, skilled mix, trends, and backfill math from raw exports.</p><div class="try">"Analyze this month's census — what should worry me?"</div></div>
+    <div class="pack"><code class="name">prior-auth</code><p>Auth packets, continued-stay reviews, peer-to-peer prep, appeal letters.</p><div class="try">"Draft the continued-stay review for this resident."</div></div>
+    <div class="pack"><code class="name">eligibility</code><p>Benefit-day math, qualifying-stay traps, MA nuances, Medicaid-pending risk.</p><div class="try">"Does this patient have benefit days left?"</div></div>
+  </div>
+
+  <div class="oss-row">
+    <span class="chip">MIT license</span>
+    <span class="chip">No sign-up</span>
+    <span class="chip">PRs welcome</span>
+    <a class="arrow" href="https://github.com/Exponential-Care/snf-skills">github.com/Exponential-Care/snf-skills ↗</a>
+  </div>
+</section>
+
+<div class="rule"><hr /></div>
+
+<section id="trust">
+  <div class="sec-head"><span class="sec-num">04</span><h2>Built like the app. Scoped like the app.</h2></div>
+  <p class="sec-sub">This is not a side door. It's the same front door, sized for an agent.</p>
+
+  <div class="trust">
+    <div class="tile"><h5>Your token, your reach</h5><p>Tokens are per-user, hashed at rest, and revocable in one click at /cli-auth. A revoked token stops working immediately.</p></div>
+    <div class="tile"><h5>Scope is server-side</h5><p>Org and facility scope are resolved from your token on our servers. Tool inputs can never widen what you're allowed to see.</p></div>
+    <div class="tile"><h5>Same permissions as the app</h5><p>Org-admin role and per-member permissions gate mutations exactly as the web app does. Every change is attributed to you and logged.</p></div>
+    <div class="tile"><h5>PCC stays with us</h5><p>PointClickCare access runs on our servers with our credentials — mTLS, OAuth, quota-governed. Nothing credential-shaped ever reaches your machine.</p></div>
+  </div>
+
+  <p class="phi">
+    <b>Working with PHI:</b> referral and census tools return protected health
+    information — the same data you see in the app, served only to authenticated
+    members of your organization. Use them under your organization's AI
+    governance and Claude commercial terms, with minimum-necessary data. The
+    open-source skills are educational reference material, not clinical,
+    billing, or legal advice.
+  </p>
+</section>
+
+<div class="rule"><hr /></div>
+
+<section id="prompts">
+  <div class="sec-head"><span class="sec-num">05</span><h2>Things people actually ask</h2></div>
+  <div class="chats">
+    <div class="chat"><div class="q">"Which of my facilities have open referrals right now?"</div><div class="r"><b>Claude</b> calls <b>referral_status_counts</b>, then breaks the queue down per building with what's aging.</div></div>
+    <div class="chat"><div class="q">"Accept the referral for John D. at Riverside and push him into PCC."</div><div class="r"><b>Claude</b> confirms the match, calls <b>update_referral_status</b>, then <b>pcc_create_pending_patient</b> — each gated on your permissions.</div></div>
+    <div class="chat"><div class="q">"Give Jane analytics access and assign her to our two Birmingham buildings."</div><div class="r"><b>Claude</b> calls <b>update_member_capabilities</b> and <b>assign_member_facilities</b> — org admins only.</div></div>
+    <div class="chat"><div class="q">"How many open beds tonight, and what's our male/female availability?"</div><div class="r"><b>Claude</b> reads the <b>pcc_bedboard</b> snapshot — occupancy, isolation beds, gender availability, freshness timestamp.</div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">Magicare
+      <small>The AI operating system for post-acute care, by Exponential Care. Not a roadmap — production.</small>
+    </div>
+    <div class="foot-links">
+      <div>
+        <span>Product</span>
+        <a href="https://app.exponentialcare.ai">Magicare app ↗</a>
+        <a href="https://app.exponentialcare.ai/cli-auth">Get a token ↗</a>
+        <a href="https://story.magicare.ai">The Magicare story ↗</a>
+      </div>
+      <div>
+        <span>Open source</span>
+        <a href="https://github.com/Exponential-Care/snf-skills">snf-skills on GitHub ↗</a>
+        <a href="https://modelcontextprotocol.io">Model Context Protocol ↗</a>
+      </div>
+      <div>
+        <span>Company</span>
+        <a href="https://magicare.ai">magicare.ai ↗</a>
+        <a href="mailto:hello@magicare.ai">Get in touch ↗</a>
+      </div>
+    </div>
+  </div>
+  <div class="fine">
+    © Exponential Care. The MCP server is available to Magicare customers; tokens are issued to signed-in users only.
+    The snf-skills library is MIT-licensed educational material drawn from public CMS methodology — verify against the
+    current CMS SNF PPS final rule, RAI manual, your state's regulations, and your payer contracts. Coding and claims
+    must always reflect what is genuinely documented in the medical record.
+  </div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three/three.module.min.js",
+    "three/addons/controls/OrbitControls.js": "./vendor/three/OrbitControls.js"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const BG = 0xF0EEE6;
+const mount = document.getElementById('world');
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(BG);
+scene.fog = new THREE.FogExp2(BG, 0.0016);
+
+const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 4000);
+camera.position.set(120, 118, 258);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+mount.appendChild(renderer.domElement);
+
+scene.add(new THREE.HemisphereLight(0xfff8ec, 0xcfc5b2, 0.95));
+const sun = new THREE.DirectionalLight(0xffedcc, 2.7);
+sun.position.set(180, 260, 120);
+scene.add(sun);
+
+// ---------- Ground ----------
+const ground = new THREE.Mesh(
+  new THREE.CircleGeometry(560, 72),
+  new THREE.MeshStandardMaterial({ color: 0xe6dfca, roughness: 1 })
+);
+ground.rotation.x = -Math.PI / 2;
+scene.add(ground);
+
+// Soft meadow patches
+const patchMat = new THREE.MeshStandardMaterial({ color: 0xdde3c4, roughness: 1 });
+for (let i = 0; i < 9; i++) {
+  const patch = new THREE.Mesh(new THREE.CircleGeometry(26 + Math.sin(i * 7.3) * 14, 28), patchMat);
+  patch.rotation.x = -Math.PI / 2;
+  patch.position.set(Math.sin(i * 2.4) * 190, 0.15, Math.cos(i * 1.9) * 175);
+  scene.add(patch);
+}
+
+// ---------- Building materials ----------
+const mat = (color, opts = {}) => new THREE.MeshStandardMaterial({ color, roughness: 0.95, ...opts });
+const CREAM = 0xfaf6ea, PAPER = 0xf1ece0, SAND = 0xecd0aa, TERRA = 0xd97757, RED = 0xc0455a, GLASS = 0x7d9cc9, TAUPE = 0xb3ac9c;
+
+// ---------- Hospital: tall cream slab, red cross, helipad ----------
+function hospital(x, z, s, rot) {
+  const g = new THREE.Group();
+  const w = 20 * s, d = 13 * s, h = 26 * s;
+  const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat(CREAM));
+  body.position.y = h / 2;
+  g.add(body);
+  // Window bands
+  for (let f = 1; f <= 4; f++) {
+    const band = new THREE.Mesh(new THREE.BoxGeometry(w * 0.92, 1.1 * s, d + 0.3), mat(GLASS, { roughness: 0.5 }));
+    band.position.y = (h * f) / 5;
+    g.add(band);
+  }
+  // Red cross on the face
+  const crossV = new THREE.Mesh(new THREE.BoxGeometry(1.9 * s, 6.2 * s, 0.5), mat(RED, { roughness: 0.7 }));
+  const crossH = new THREE.Mesh(new THREE.BoxGeometry(6.2 * s, 1.9 * s, 0.5), mat(RED, { roughness: 0.7 }));
+  crossV.position.set(0, h - 4.4 * s, d / 2 + 0.3);
+  crossH.position.set(0, h - 4.4 * s, d / 2 + 0.3);
+  g.add(crossV, crossH);
+  // Helipad
+  const pad = new THREE.Mesh(new THREE.CylinderGeometry(4.4 * s, 4.4 * s, 0.5, 20), mat(TAUPE, { roughness: 0.9 }));
+  pad.position.set(-w * 0.18, h + 0.25, 0);
+  g.add(pad);
+  // Low ER wing
+  const wing = new THREE.Mesh(new THREE.BoxGeometry(w * 0.7, 6 * s, d * 0.9), mat(PAPER));
+  wing.position.set(w * 0.72, 3 * s, 0);
+  g.add(wing);
+  g.position.set(x, 0, z);
+  g.rotation.y = rot;
+  scene.add(g);
+  return new THREE.Vector3(x, h + 3 * s, z);
+}
+
+// ---------- Payer: blue-gray glass office tower ----------
+function payerTower(x, z, s, rot) {
+  const g = new THREE.Group();
+  const w = 13 * s, d = 13 * s, h = 34 * s;
+  const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat(GLASS, { roughness: 0.35, metalness: 0.15 }));
+  body.position.y = h / 2;
+  g.add(body);
+  // Mullion strips
+  for (const off of [-w * 0.25, 0, w * 0.25]) {
+    const strip = new THREE.Mesh(new THREE.BoxGeometry(0.6, h, d + 0.3), mat(PAPER));
+    strip.position.set(off, h / 2, 0);
+    g.add(strip);
+  }
+  const crown = new THREE.Mesh(new THREE.BoxGeometry(w * 0.7, 1.6 * s, d * 0.7), mat(PAPER));
+  crown.position.y = h + 0.8 * s;
+  g.add(crown);
+  const lobby = new THREE.Mesh(new THREE.BoxGeometry(w * 1.5, 4 * s, d * 1.2), mat(PAPER));
+  lobby.position.y = 2 * s;
+  g.add(lobby);
+  g.position.set(x, 0, z);
+  g.rotation.y = rot;
+  scene.add(g);
+  return new THREE.Vector3(x, h + 3 * s, z);
+}
+
+// ---------- Patient home: little gabled house ----------
+function house(x, z, s, rot, roofColor) {
+  const g = new THREE.Group();
+  const w = 6.5 * s, d = 5.5 * s, h = 4 * s;
+  const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat(CREAM));
+  body.position.y = h / 2;
+  g.add(body);
+  const roof = new THREE.Mesh(new THREE.ConeGeometry(w * 0.78, 3.2 * s, 4), mat(roofColor, { roughness: 0.85 }));
+  roof.position.y = h + 1.6 * s;
+  roof.rotation.y = Math.PI / 4;
+  g.add(roof);
+  const door = new THREE.Mesh(new THREE.BoxGeometry(1.2 * s, 2 * s, 0.3), mat(0x8a6f52));
+  door.position.set(0, s, d / 2 + 0.15);
+  g.add(door);
+  g.position.set(x, 0, z);
+  g.rotation.y = rot;
+  scene.add(g);
+}
+
+// A neighborhood: a handful of homes on a meadow patch; arc lands on its center.
+function neighborhood(cx, cz, s) {
+  const spots = [[-11, -4, 0.3], [10, -8, -0.4], [-2, 9, 0.9], [13, 7, 0.2], [-14, 10, -0.7]];
+  const roofs = [TERRA, TAUPE, 0x8a6f52, TERRA, TAUPE];
+  spots.forEach(([dx, dz, r], i) => house(cx + dx * s, cz + dz * s, s * (0.85 + (i % 3) * 0.12), r, roofs[i]));
+  return new THREE.Vector3(cx, 9 * s, cz);
+}
+
+// ---------- The nursing home (center of the world) ----------
+function nursingHome() {
+  const g = new THREE.Group();
+  // Lawn
+  const lawn = new THREE.Mesh(new THREE.CircleGeometry(34, 40), mat(0xdde3c4));
+  lawn.rotation.x = -Math.PI / 2;
+  lawn.position.y = 0.2;
+  g.add(lawn);
+  // Central block
+  const core = new THREE.Mesh(new THREE.BoxGeometry(22, 11, 14), mat(CREAM));
+  core.position.y = 5.5;
+  g.add(core);
+  const coreRoof = new THREE.Mesh(new THREE.BoxGeometry(23.4, 1.6, 15.4), mat(TERRA, { roughness: 0.8 }));
+  coreRoof.position.y = 11.8;
+  g.add(coreRoof);
+  // Two resident wings (U-shape opening toward the entry)
+  for (const side of [-1, 1]) {
+    const wing = new THREE.Mesh(new THREE.BoxGeometry(9, 8, 26), mat(PAPER));
+    wing.position.set(side * 14.5, 4, 7);
+    g.add(wing);
+    const wingRoof = new THREE.Mesh(new THREE.BoxGeometry(10.2, 1.3, 27.4), mat(TERRA, { roughness: 0.8 }));
+    wingRoof.position.set(side * 14.5, 8.65, 7);
+    g.add(wingRoof);
+    // Window bands along the wings
+    const band = new THREE.Mesh(new THREE.BoxGeometry(9.3, 1.2, 24), mat(GLASS, { roughness: 0.5 }));
+    band.position.set(side * 14.5, 4.6, 7);
+    g.add(band);
+  }
+  // Entry porte-cochère
+  const canopy = new THREE.Mesh(new THREE.BoxGeometry(9, 0.9, 6.5), mat(TERRA, { roughness: 0.7 }));
+  canopy.position.set(0, 4.6, 10.5);
+  g.add(canopy);
+  for (const px of [-3.6, 3.6]) {
+    const post = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.35, 4.4, 8), mat(0x8a6f52));
+    post.position.set(px, 2.2, 12.8);
+    g.add(post);
+  }
+  // Courtyard garden dots
+  for (let i = 0; i < 7; i++) {
+    const bush = new THREE.Mesh(new THREE.SphereGeometry(1 + (i % 3) * 0.4, 8, 8), mat([0xa3c48b, 0x5fa88f][i % 2]));
+    bush.position.set(Math.sin(i * 2.2) * 24, 0.9, 18 + Math.cos(i * 1.7) * 6);
+    g.add(bush);
+  }
+  // Rooftop beacon — the MCP uplink
+  const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.28, 7, 8), mat(0x29261B, { roughness: 0.5 }));
+  mast.position.y = 15.5;
+  g.add(mast);
+  const beacon = new THREE.Mesh(
+    new THREE.SphereGeometry(1.7, 14, 14),
+    new THREE.MeshStandardMaterial({ color: TERRA, emissive: TERRA, emissiveIntensity: 0.7, roughness: 0.35 })
+  );
+  beacon.position.y = 19.6;
+  g.add(beacon);
+  scene.add(g);
+  return beacon;
+}
+
+const beacon = nursingHome();
+
+// Satellites the nursing home talks to: hospitals in, payer up, homes out.
+const sites = [
+  hospital(-124, -52, 1.15, 0.5),          // referring hospital
+  hospital(196, -44, 0.72, -0.8),          // second hospital / clinic
+  payerTower(152, 40, 1.0, 0.9),           // the payer
+  neighborhood(-64, 122, 1.1),             // patients' homes
+  neighborhood(92, -108, 0.95),            // more homes
+  neighborhood(-176, 58, 0.9),             // more homes
+];
+
+// ---------- Trees ----------
+const trunkMat = new THREE.MeshStandardMaterial({ color: 0x8a6f52, roughness: 1 });
+const leafMats = [0xa3c48b, 0x5fa88f, 0x3f7d6d].map(c => new THREE.MeshStandardMaterial({ color: c, roughness: 1 }));
+for (let i = 0; i < 60; i++) {
+  const a = i * 2.399963, r = 60 + (i * 37 % 200);
+  const x = Math.cos(a) * r, z = Math.sin(a) * r * 0.92;
+  if (sites.some(s => Math.hypot(s.x - x, s.z - z) < 34) || Math.hypot(x, z) < 44) continue;
+  const t = new THREE.Group();
+  const th = 2.2 + (i % 5) * 0.7;
+  const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.7, th, 5), trunkMat);
+  trunk.position.y = th / 2;
+  const crown = new THREE.Mesh(new THREE.ConeGeometry(2.6 + (i % 4), 5.5 + (i % 6), 6), leafMats[i % 3]);
+  crown.position.y = th + 2.4;
+  t.add(trunk, crown);
+  t.position.set(x, 0, z);
+  scene.add(t);
+}
+
+// Arcs leave from the nursing home's rooftop beacon.
+const hub = new THREE.Vector3(0, 20, 0);
+
+// ---------- Connection arcs + data pulses ----------
+const pulses = [];
+const arcMat = new THREE.MeshStandardMaterial({
+  color: 0xd97757, emissive: 0xd97757, emissiveIntensity: 0.25,
+  transparent: true, opacity: 0.34, roughness: 0.6
+});
+const pulseGeo = new THREE.SphereGeometry(1.05, 10, 10);
+sites.forEach((site, i) => {
+  const mid = new THREE.Vector3().addVectors(hub, site).multiplyScalar(0.5);
+  mid.y = Math.max(hub.y, site.y) + 26 + (i % 3) * 9;
+  const curve = new THREE.QuadraticBezierCurve3(hub, mid, site);
+  const tube = new THREE.Mesh(new THREE.TubeGeometry(curve, 40, 0.28, 6, false), arcMat);
+  scene.add(tube);
+  for (let k = 0; k < 2; k++) {
+    const m = new THREE.Mesh(pulseGeo, new THREE.MeshStandardMaterial({
+      color: 0xd97757, emissive: 0xd97757, emissiveIntensity: 0.9, roughness: 0.3
+    }));
+    scene.add(m);
+    pulses.push({ mesh: m, curve, t: (i * 0.13 + k * 0.5) % 1, speed: 0.0021 + (i % 4) * 0.0004, dir: k % 2 === 0 ? 1 : -1 });
+  }
+});
+
+// ---------- Drifting motes ----------
+const moteGeo = new THREE.BufferGeometry();
+const moteCount = 130, motePos = new Float32Array(moteCount * 3);
+for (let i = 0; i < moteCount; i++) {
+  motePos[i * 3] = (Math.random() - 0.5) * 480;
+  motePos[i * 3 + 1] = 6 + Math.random() * 90;
+  motePos[i * 3 + 2] = (Math.random() - 0.5) * 440;
+}
+moteGeo.setAttribute('position', new THREE.BufferAttribute(motePos, 3));
+const motes = new THREE.Points(moteGeo, new THREE.PointsMaterial({ color: 0xb3ac9c, size: 1.1, transparent: true, opacity: 0.55 }));
+scene.add(motes);
+
+// ---------- Controls ----------
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(-74, 14, 0);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.enablePan = false;
+controls.minDistance = 90;
+controls.maxDistance = 420;
+controls.maxPolarAngle = Math.PI * 0.472;
+controls.autoRotate = !reduced;
+controls.autoRotateSpeed = 0.55;
+renderer.domElement.addEventListener('pointerdown', () => { controls.autoRotate = false; });
+
+function resize() {
+  const w = mount.clientWidth, h = mount.clientHeight;
+  renderer.setSize(w, h);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resize);
+resize();
+
+const clock = new THREE.Clock();
+function tick() {
+  requestAnimationFrame(tick);
+  const t = clock.getElapsedTime();
+  if (!reduced) {
+    for (const p of pulses) {
+      p.t = (p.t + p.speed) % 1;
+      const at = p.dir === 1 ? p.t : 1 - p.t;
+      p.curve.getPoint(at, p.mesh.position);
+    }
+    beacon.material.emissiveIntensity = 0.55 + Math.sin(t * 2.2) * 0.25;
+    motes.rotation.y = t * 0.008;
+  }
+  controls.update();
+  renderer.render(scene, camera);
+}
+tick();
+
+// ---------- Nav + copy buttons ----------
+const nav = document.getElementById('nav');
+addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 24), { passive: true });
+
+document.querySelectorAll('.copy').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const block = document.getElementById(btn.dataset.copy);
+    const text = Array.from(block.childNodes)
+      .filter(n => n.nodeType === Node.TEXT_NODE || (n.nodeType === 1 && n.tagName !== 'BUTTON'))
+      .map(n => n.textContent).join('').trim();
+    try {
+      await navigator.clipboard.writeText(text);
+      btn.textContent = 'Copied'; btn.classList.add('ok');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('ok'); }, 1600);
+    } catch { btn.textContent = 'Select + copy'; }
+  });
+});
+</script>
+</body>
+</html>
