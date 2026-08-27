@@ -134,16 +134,18 @@
   @media (max-width: 720px) { .nav-links a.hide-sm { display: none; } }
 
   /* ---------- Hero ---------- */
-  .hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; }
+  .hero { position: relative; min-height: 100svh; display: flex; align-items: center; }
   #world { position: absolute; inset: 0; z-index: 0; }
-  #world canvas { display: block; }
+  #world canvas { display: block; cursor: pointer; }
+  #world.active canvas { cursor: grab; }
+  #world.active canvas:active { cursor: grabbing; }
   .hero-veil {
     position: absolute; inset: 0; z-index: 1; pointer-events: none;
     background: linear-gradient(180deg, rgba(240,238,230,.25) 0%, rgba(240,238,230,0) 30%, rgba(240,238,230,0) 55%, rgba(240,238,230,.92) 88%, var(--bg) 100%);
   }
   .hero-inner {
     position: relative; z-index: 2; width: 100%;
-    max-width: 1080px; margin: 0 auto; padding: 0 28px 64px;
+    max-width: 1080px; margin: 0 auto; padding: 92px 28px 56px;
   }
   .hero-card {
     display: inline-block; max-width: 640px;
@@ -802,7 +804,26 @@ controls.maxDistance = 420;
 controls.maxPolarAngle = Math.PI * 0.472;
 controls.autoRotate = !reduced;
 controls.autoRotateSpeed = 0.55;
-renderer.domElement.addEventListener('pointerdown', () => { controls.autoRotate = false; });
+
+// Click-to-activate: the world ignores wheel/drag/touch (so the page scrolls
+// freely over it) until it's clicked; clicking anywhere else releases it.
+const dragHint = document.querySelector('.drag-hint');
+const HINT_IDLE = 'Click the world to explore ⟲';
+const HINT_ACTIVE = 'Drag to orbit · scroll to zoom · click away to release';
+function setWorldActive(on) {
+  controls.enabled = on;
+  if (on) controls.autoRotate = false;
+  mount.classList.toggle('active', on);
+  // OrbitControls sets touch-action: none, which traps touch scrolling —
+  // restore pan-y whenever the world is inactive.
+  renderer.domElement.style.touchAction = on ? 'none' : 'pan-y';
+  if (dragHint) dragHint.textContent = on ? HINT_ACTIVE : HINT_IDLE;
+}
+setWorldActive(false);
+// Capture phase so the activating press also starts the first drag.
+renderer.domElement.addEventListener('pointerdown', () => setWorldActive(true), { capture: true });
+document.addEventListener('pointerdown', (e) => { if (!mount.contains(e.target)) setWorldActive(false); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setWorldActive(false); });
 
 function resize() {
   const w = mount.clientWidth, h = mount.clientHeight;
