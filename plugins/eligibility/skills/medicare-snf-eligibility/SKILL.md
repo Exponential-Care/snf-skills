@@ -1,5 +1,6 @@
 ---
 name: medicare-snf-eligibility
+license: MIT
 description: >-
   Reason through skilled nursing facility (SNF) coverage before or at admission:
   Medicare Part A benefit-period math, the 3-day qualifying stay, Medicare

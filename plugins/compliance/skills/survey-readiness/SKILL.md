@@ -1,5 +1,6 @@
 ---
 name: survey-readiness
+license: MIT
 description: >-
   Prepares skilled nursing facilities for state surveys and helps respond to
   them: annual recertification and complaint survey basics, the F-tag system

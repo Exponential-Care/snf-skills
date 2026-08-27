@@ -1,5 +1,6 @@
 ---
 name: nta-score-capture
+license: MIT
 description: >-
   Maximizes legitimate PDPM NTA (Non-Therapy Ancillary) comorbidity capture by
   parsing hospital referral/discharge documentation for the ~50 CMS-published
@@ -22,19 +23,14 @@ supported.
 
 ## Why NTA matters
 
-- Under PDPM, the NTA component is the one most often **under-captured**. It
-  depends on scattered comorbidity evidence (med lists, labs, wound notes,
-  infection notes) rather than a single assessment section, so points slip
-  through when nobody reads the whole packet.
-- NTA is paid with a **variable per diem adjustment: 3x the NTA rate on days
-  1–3** of the stay, then 1.0x for days 4–100. Missing points hurts most in
-  the highest-cost first days.
-- Each condition adds points; the **point total maps to a tier** (NF through
-  NA), and the tier's case-mix index multiplies the NTA base rate for the
-  **entire stay**. One missed 1-point condition can drop the whole stay a tier.
-- The capture window is short: most NTA items come from the 5-day PDPM
-  assessment (and the SNF claim, for HIV/AIDS), so the review has to happen at
-  or immediately after admission.
+NTA is the PDPM component most often under-captured: its evidence is scattered
+across med lists, labs, wound and infection notes rather than one assessment
+section, so points slip through when nobody reads the whole packet. The point
+total maps to a tier (NF–NA) whose case-mix index multiplies the NTA rate for
+the **entire stay** — paid at **3x on days 1–3**, 1.0x on days 4–100 — so one
+missed 1-point condition can drop the whole stay a tier. The window is short:
+most NTA items come from the 5-day PDPM assessment (HIV/AIDS from the SNF
+claim), so the review must happen at or immediately after admission.
 
 **Ethics — read this first.** The goal is accurate capture of REAL, documented
 conditions — never upcoding. Suggesting a diagnosis that is not in the medical

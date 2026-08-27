@@ -46,8 +46,17 @@ In [Claude Code](https://claude.com/claude-code) (terminal, desktop, or web):
 /plugin install referral-triage@snf-skills
 ```
 
-Install as many packs as you want — each is independent. Then just work
-naturally:
+Using another agent? These skills follow the open
+[Agent Skills](https://agentskills.io) format, so the
+[skills CLI](https://github.com/vercel-labs/skills) installs them into Cursor,
+Codex, opencode, and any other supported agent:
+
+```
+npx skills add Exponential-Care/snf-skills
+```
+
+Install as many packs (or individual skills) as you want — each is
+independent. Then just work naturally:
 
 > **You:** Here's a referral packet from Example Hospital (referral.pdf) — should we take this patient?
 >
