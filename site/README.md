@@ -32,5 +32,5 @@ cd site && python3 -m http.server 4321
 - The MCP endpoint shown is `https://app.exponentialcare.ai/api/mcp/org`;
   update the page if the endpoint or tool list changes.
 - The skills install commands point at this repo's marketplace
-  (`/plugin marketplace add Exponential-Care/snf-skills`) — keep them in sync
+  (`/plugin marketplace add magicare-ai/snf-skills`) — keep them in sync
   with the pack list in the repo root README.

@@ -42,7 +42,7 @@ negotiator would give — with worksheets, evidence, and the caveats that matter
 In [Claude Code](https://claude.com/claude-code) (terminal, desktop, or web):
 
 ```
-/plugin marketplace add Exponential-Care/snf-skills
+/plugin marketplace add magicare-ai/snf-skills
 /plugin install referral-triage@snf-skills
 ```
 
@@ -52,7 +52,7 @@ Using another agent? These skills follow the open
 Codex, opencode, and any other supported agent:
 
 ```
-npx skills add Exponential-Care/snf-skills
+npx skills add magicare-ai/snf-skills
 ```
 
 Install as many packs (or individual skills) as you want — each is
